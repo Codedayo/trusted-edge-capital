@@ -110,19 +110,19 @@ export default function TradingPanel({ className }: TradingPanelProps) {
   };
 
   return (
-    <div className={`space-y-6 ${className}`}>
+    <div className={`space-y-4 sm:space-y-6 ${className}`}>
       {/* Asset Selection and Price Info */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
         <Card className="border-0 shadow-lg">
           <CardHeader className="border-b border-slate-200 dark:border-slate-700">
-            <CardTitle className="flex items-center space-x-2">
-              <Target className="h-5 w-5 text-blue-600" />
+            <CardTitle className="flex items-center space-x-2 text-sm sm:text-base">
+              <Target className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600" />
               <span>Asset Selection</span>
             </CardTitle>
           </CardHeader>
-          <CardContent className="p-6 space-y-4">
+          <CardContent className="p-4 sm:p-6 space-y-3 sm:space-y-4">
             <div>
-              <Label>Asset Type</Label>
+              <Label className="text-xs sm:text-sm">Asset Type</Label>
               <Select 
                 value={selectedAsset?.asset_type || ''} 
                 onValueChange={(value) => {
@@ -130,7 +130,7 @@ export default function TradingPanel({ className }: TradingPanelProps) {
                   setSelectedAsset(filtered[0] || null);
                 }}
               >
-                <SelectTrigger className="h-12">
+                <SelectTrigger className="h-10 sm:h-12">
                   <SelectValue placeholder="Select asset type" />
                 </SelectTrigger>
                 <SelectContent>
@@ -142,7 +142,7 @@ export default function TradingPanel({ className }: TradingPanelProps) {
             </div>
 
             <div>
-              <Label>Asset</Label>
+              <Label className="text-xs sm:text-sm">Asset</Label>
               <Select 
                 value={selectedAsset?.id || ''} 
                 onValueChange={(value) => {
@@ -150,7 +150,7 @@ export default function TradingPanel({ className }: TradingPanelProps) {
                   setSelectedAsset(asset || null);
                 }}
               >
-                <SelectTrigger className="h-12">
+                <SelectTrigger className="h-10 sm:h-12">
                   <SelectValue placeholder="Select asset" />
                 </SelectTrigger>
                 <SelectContent>
@@ -166,20 +166,20 @@ export default function TradingPanel({ className }: TradingPanelProps) {
             </div>
 
             {selectedAsset && (
-              <div className="p-4 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950 dark:to-purple-950 rounded-xl border border-blue-200 dark:border-blue-800">
+              <div className="p-3 sm:p-4 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950 dark:to-purple-950 rounded-xl border border-blue-200 dark:border-blue-800">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-medium text-slate-600 dark:text-slate-400">Current Price</span>
+                  <span className="text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-400">Current Price</span>
                   <Badge variant="outline" className="text-xs">
                     {selectedAsset.asset_type?.toUpperCase()}
                   </Badge>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-2xl font-bold text-slate-900 dark:text-slate-100">
+                  <span className="text-lg sm:text-2xl font-bold text-slate-900 dark:text-slate-100">
                     ${currentPrice.toFixed(2)}
                   </span>
                   <div className={`flex items-center space-x-1 ${getPriceChangeColor(priceChange)}`}>
                     {getPriceChangeIcon(priceChange)}
-                    <span className="text-sm font-medium">
+                    <span className="text-xs sm:text-sm font-medium">
                       {priceChange >= 0 ? '+' : ''}{priceChange.toFixed(2)}%
                     </span>
                   </div>
@@ -195,40 +195,40 @@ export default function TradingPanel({ className }: TradingPanelProps) {
         {/* Order Form */}
         <Card className="border-0 shadow-lg">
           <CardHeader className="border-b border-slate-200 dark:border-slate-700">
-            <CardTitle className="flex items-center space-x-2">
-              <Zap className="h-5 w-5 text-green-600" />
+            <CardTitle className="flex items-center space-x-2 text-sm sm:text-base">
+              <Zap className="h-4 w-4 sm:h-5 sm:w-5 text-green-600" />
               <span>Place Order</span>
             </CardTitle>
           </CardHeader>
-          <CardContent className="p-6 space-y-4">
+          <CardContent className="p-4 sm:p-6 space-y-3 sm:space-y-4">
             {/* Order Side */}
             <div>
-              <Label>Order Side</Label>
+              <Label className="text-xs sm:text-sm">Order Side</Label>
               <div className="grid grid-cols-2 gap-2 mt-2">
                 <Button
                   type="button"
                   variant={orderSide === 'buy' ? 'default' : 'outline'}
-                  className={`h-12 ${
+                  className={`h-10 sm:h-12 text-xs sm:text-sm ${
                     orderSide === 'buy' 
                       ? 'bg-gradient-to-r from-green-500 to-green-600 text-white' 
                       : 'hover:bg-green-50 dark:hover:bg-green-950'
                   }`}
                   onClick={() => setOrderSide('buy')}
                 >
-                  <TrendingUp className="h-4 w-4 mr-2" />
+                  <TrendingUp className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
                   Buy
                 </Button>
                 <Button
                   type="button"
                   variant={orderSide === 'sell' ? 'default' : 'outline'}
-                  className={`h-12 ${
+                  className={`h-10 sm:h-12 text-xs sm:text-sm ${
                     orderSide === 'sell' 
                       ? 'bg-gradient-to-r from-red-500 to-red-600 text-white' 
                       : 'hover:bg-red-50 dark:hover:bg-red-950'
                   }`}
                   onClick={() => setOrderSide('sell')}
                 >
-                  <TrendingDown className="h-4 w-4 mr-2" />
+                  <TrendingDown className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
                   Sell
                 </Button>
               </div>
@@ -236,9 +236,9 @@ export default function TradingPanel({ className }: TradingPanelProps) {
 
             {/* Order Type */}
             <div>
-              <Label>Order Type</Label>
+              <Label className="text-xs sm:text-sm">Order Type</Label>
               <Select value={orderType} onValueChange={(value: any) => setOrderType(value)}>
-                <SelectTrigger className="h-12">
+                <SelectTrigger className="h-10 sm:h-12">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -253,26 +253,26 @@ export default function TradingPanel({ className }: TradingPanelProps) {
 
             {/* Amount */}
             <div>
-              <Label>Amount ({selectedAsset?.base_currency || 'USD'})</Label>
+              <Label className="text-xs sm:text-sm">Amount ({selectedAsset?.base_currency || 'USD'})</Label>
               <Input
                 type="number"
                 placeholder="0.00"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
-                className="h-12"
+                className="h-10 sm:h-12"
               />
             </div>
 
             {/* Price (for non-market orders) */}
             {orderType !== 'market' && (
               <div>
-                <Label>Price (USD)</Label>
+                <Label className="text-xs sm:text-sm">Price (USD)</Label>
                 <Input
                   type="number"
                   placeholder="0.00"
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}
-                  className="h-12"
+                  className="h-10 sm:h-12"
                 />
               </div>
             )}
@@ -280,22 +280,22 @@ export default function TradingPanel({ className }: TradingPanelProps) {
             {/* Stop Price (for stop orders) */}
             {(orderType === 'stop_loss' || orderType === 'stop_limit') && (
               <div>
-                <Label>Stop Price (USD)</Label>
+                <Label className="text-xs sm:text-sm">Stop Price (USD)</Label>
                 <Input
                   type="number"
                   placeholder="0.00"
                   value={stopPrice}
                   onChange={(e) => setStopPrice(e.target.value)}
-                  className="h-12"
+                  className="h-10 sm:h-12"
                 />
               </div>
             )}
 
             {/* Time in Force */}
             <div>
-              <Label>Time in Force</Label>
+              <Label className="text-xs sm:text-sm">Time in Force</Label>
               <Select value={timeInForce} onValueChange={(value: any) => setTimeInForce(value)}>
-                <SelectTrigger className="h-12">
+                <SelectTrigger className="h-10 sm:h-12">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -308,14 +308,14 @@ export default function TradingPanel({ className }: TradingPanelProps) {
 
             {/* Order Summary */}
             {amount && (
-              <div className="p-4 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
+              <div className="p-3 sm:p-4 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-medium text-slate-600 dark:text-slate-400">Order Summary</span>
-                  <Badge variant={orderSide === 'buy' ? 'default' : 'destructive'}>
+                  <span className="text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-400">Order Summary</span>
+                  <Badge variant={orderSide === 'buy' ? 'default' : 'destructive'} className="text-xs">
                     {orderSide.toUpperCase()}
                   </Badge>
                 </div>
-                <div className="space-y-2 text-sm">
+                <div className="space-y-1 sm:space-y-2 text-xs sm:text-sm">
                   <div className="flex justify-between">
                     <span>Amount:</span>
                     <span className="font-medium">{amount} {selectedAsset?.base_currency}</span>
@@ -342,7 +342,7 @@ export default function TradingPanel({ className }: TradingPanelProps) {
             <Button 
               onClick={handlePlaceOrder} 
               disabled={loading || !amount || !selectedAsset}
-              className={`w-full h-12 ${
+              className={`w-full h-10 sm:h-12 text-xs sm:text-sm ${
                 orderSide === 'buy' 
                   ? 'bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700' 
                   : 'bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700'
@@ -350,12 +350,12 @@ export default function TradingPanel({ className }: TradingPanelProps) {
             >
               {loading ? (
                 <div className="flex items-center space-x-2">
-                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  <div className="w-3 h-3 sm:w-4 sm:h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                   <span>Processing...</span>
                 </div>
               ) : (
                 <div className="flex items-center space-x-2">
-                  <CheckCircle className="h-4 w-4" />
+                  <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4" />
                   <span>Place {orderSide.charAt(0).toUpperCase() + orderSide.slice(1)} Order</span>
                 </div>
               )}
@@ -367,32 +367,32 @@ export default function TradingPanel({ className }: TradingPanelProps) {
       {/* Order History Preview */}
       <Card className="border-0 shadow-lg">
         <CardHeader className="border-b border-slate-200 dark:border-slate-700">
-          <CardTitle className="flex items-center space-x-2">
-            <Activity className="h-5 w-5 text-purple-600" />
+          <CardTitle className="flex items-center space-x-2 text-sm sm:text-base">
+            <Activity className="h-4 w-4 sm:h-5 sm:w-5 text-purple-600" />
             <span>Recent Orders</span>
           </CardTitle>
         </CardHeader>
-        <CardContent className="p-6">
-          <div className="space-y-3">
+        <CardContent className="p-4 sm:p-6">
+          <div className="space-y-2 sm:space-y-3">
             {[
               { id: 1, symbol: 'BTCUSDT', side: 'buy', amount: '0.5', price: '43250', status: 'filled', time: '2 min ago' },
               { id: 2, symbol: 'ETHUSDT', side: 'sell', amount: '2.0', price: '2680', status: 'pending', time: '5 min ago' },
               { id: 3, symbol: 'AAPL', side: 'buy', amount: '10', price: '175.50', status: 'filled', time: '1 hour ago' },
             ].map((order) => (
-              <div key={order.id} className="flex items-center justify-between p-3 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
-                <div className="flex items-center space-x-3">
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+              <div key={order.id} className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-3 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                <div className="flex items-center space-x-3 mb-2 sm:mb-0">
+                  <div className={`w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center ${
                     order.side === 'buy' ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'
                   }`}>
-                    {order.side === 'buy' ? <TrendingUp className="h-4 w-4" /> : <TrendingDown className="h-4 w-4" />}
+                    {order.side === 'buy' ? <TrendingUp className="h-3 w-3 sm:h-4 sm:w-4" /> : <TrendingDown className="h-3 w-3 sm:h-4 sm:w-4" />}
                   </div>
-                  <div>
-                    <p className="font-medium text-slate-900 dark:text-slate-100">{order.symbol}</p>
-                    <p className="text-sm text-slate-500 dark:text-slate-400">{order.amount} @ ${order.price}</p>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-medium text-slate-900 dark:text-slate-100 text-sm sm:text-base truncate">{order.symbol}</p>
+                    <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 truncate">{order.amount} @ ${order.price}</p>
                   </div>
                 </div>
-                <div className="text-right">
-                  <Badge variant={order.status === 'filled' ? 'default' : 'secondary'} className="mb-1">
+                <div className="text-left sm:text-right">
+                  <Badge variant={order.status === 'filled' ? 'default' : 'secondary'} className="mb-1 text-xs">
                     {order.status}
                   </Badge>
                   <p className="text-xs text-slate-500 dark:text-slate-400">{order.time}</p>

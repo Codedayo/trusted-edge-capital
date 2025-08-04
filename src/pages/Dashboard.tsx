@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from '@/components/ui/dialog';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { 
   Home, 
   TrendingUp, 
@@ -41,9 +42,11 @@ import MarketData from '@/components/dashboard/MarketData';
 import TransactionHistory from '@/components/dashboard/TransactionHistory';
 import CryptoWallet from '@/components/dashboard/CryptoWallet';
 import { useAuth } from '@/contexts/AuthContext';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 export default function Dashboard() {
   const { user, signOut } = useAuth();
+  const isMobile = useIsMobile();
   const [activeTab, setActiveTab] = useState('overview');
   const [isDepositDialogOpen, setIsDepositDialogOpen] = useState(false);
   const [isWithdrawDialogOpen, setIsWithdrawDialogOpen] = useState(false);
@@ -52,6 +55,7 @@ export default function Dashboard() {
   const [withdrawAmount, setWithdrawAmount] = useState('');
   const [withdrawAsset, setWithdrawAsset] = useState('USDT');
   const [withdrawAddress, setWithdrawAddress] = useState('');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
@@ -139,28 +143,83 @@ export default function Dashboard() {
     return typeof window !== 'undefined' && localStorage.getItem('demoUser');
   };
 
+  const NavigationSidebar = () => (
+    <nav className="p-4 space-y-2">
+      {navigation.map((item) => (
+        <Button
+          key={item.id}
+          variant={activeTab === item.id ? 'default' : 'ghost'}
+          className={`w-full justify-start ${
+            activeTab === item.id 
+              ? 'bg-trusted-gold-gradient text-white shadow-lg' 
+              : 'hover:bg-slate-100 dark:hover:bg-slate-700 text-trusted-text-primary dark:text-slate-100'
+          }`}
+          onClick={() => {
+            setActiveTab(item.id);
+            if (isMobile) {
+              setIsSidebarOpen(false);
+            }
+          }}
+        >
+          <item.icon className="h-4 w-4 mr-3" />
+          {item.label}
+        </Button>
+      ))}
+    </nav>
+  );
+
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
       {/* Header */}
       <header className="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 sticky top-0 z-50">
-        <div className="flex items-center justify-between px-6 py-4">
-          <div className="flex items-center space-x-4">
+        <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4">
+          <div className="flex items-center space-x-3 sm:space-x-4">
+            {isMobile && (
+              <Sheet open={isSidebarOpen} onOpenChange={setIsSidebarOpen}>
+                <SheetTrigger asChild>
+                  <Button variant="ghost" size="sm" className="p-2">
+                    <Menu className="h-5 w-5" />
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="left" className="w-64 p-0">
+                  <div className="p-4 border-b border-slate-200 dark:border-slate-700">
+                    <div className="flex items-center space-x-3">
+                      <img 
+                        src="/Trusted Edge Capital Logo.png" 
+                        alt="Trusted Edge Capital" 
+                        className="h-6 w-auto"
+                      />
+                      <div>
+                        <h1 className="text-sm font-bold text-trusted-navy dark:text-slate-100">
+                          Trusted Edge Capital
+                        </h1>
+                        <p className="text-xs text-trusted-text-secondary dark:text-slate-400">
+                          Professional Trading Platform
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <NavigationSidebar />
+                </SheetContent>
+              </Sheet>
+            )}
+            
             <img 
               src="/Trusted Edge Capital Logo.png" 
               alt="Trusted Edge Capital" 
-              className="h-8 w-auto"
+              className="h-6 sm:h-8 w-auto"
             />
-            <div className="hidden md:block">
-              <h1 className="text-xl font-bold text-trusted-navy dark:text-slate-100">
+            <div className="hidden sm:block">
+              <h1 className="text-lg sm:text-xl font-bold text-trusted-navy dark:text-slate-100">
                 Trusted Edge Capital
               </h1>
-              <p className="text-sm text-trusted-text-secondary dark:text-slate-400">
+              <p className="text-xs sm:text-sm text-trusted-text-secondary dark:text-slate-400">
                 Professional Trading Platform
               </p>
             </div>
           </div>
 
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-2 sm:space-x-4">
             <div className="relative hidden md:block">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
               <Input
@@ -169,9 +228,9 @@ export default function Dashboard() {
               />
             </div>
             
-            <Button variant="ghost" size="sm" className="relative">
-              <Bell className="h-5 w-5" />
-              <Badge className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 flex items-center justify-center text-xs">
+            <Button variant="ghost" size="sm" className="relative p-2">
+              <Bell className="h-4 w-5" />
+              <Badge className="absolute -top-1 -right-1 h-4 w-4 rounded-full p-0 flex items-center justify-center text-xs">
                 3
               </Badge>
             </Button>
@@ -182,7 +241,7 @@ export default function Dashboard() {
                   {getUserInitials()}
                 </span>
               </div>
-              <div className="hidden md:block text-left">
+              <div className="hidden sm:block text-left">
                 <p className="text-sm font-medium text-trusted-text-primary dark:text-slate-100">
                   {getUserDisplayName()}
                 </p>
@@ -199,7 +258,7 @@ export default function Dashboard() {
                 variant="ghost"
                 size="sm"
                 onClick={handleSignOut}
-                className="text-trusted-text-secondary hover:text-trusted-text-primary"
+                className="text-trusted-text-secondary hover:text-trusted-text-primary p-2"
               >
                 <LogOut className="h-4 w-4" />
               </Button>
@@ -209,51 +268,37 @@ export default function Dashboard() {
       </header>
 
       <div className="flex">
-        {/* Sidebar */}
-        <aside className="w-64 bg-white dark:bg-slate-800 border-r border-slate-200 dark:border-slate-700 min-h-screen">
-          <nav className="p-4 space-y-2">
-            {navigation.map((item) => (
-              <Button
-                key={item.id}
-                variant={activeTab === item.id ? 'default' : 'ghost'}
-                className={`w-full justify-start ${
-                  activeTab === item.id 
-                    ? 'bg-trusted-gold-gradient text-white shadow-lg' 
-                    : 'hover:bg-slate-100 dark:hover:bg-slate-700 text-trusted-text-primary dark:text-slate-100'
-                }`}
-                onClick={() => setActiveTab(item.id)}
-              >
-                <item.icon className="h-4 w-4 mr-3" />
-                {item.label}
-              </Button>
-            ))}
-          </nav>
-        </aside>
+        {/* Desktop Sidebar */}
+        {!isMobile && (
+          <aside className="w-64 bg-white dark:bg-slate-800 border-r border-slate-200 dark:border-slate-700 min-h-screen">
+            <NavigationSidebar />
+          </aside>
+        )}
 
         {/* Main Content */}
-        <main className="flex-1 p-6">
+        <main className="flex-1 p-4 sm:p-6">
           {/* Quick Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
             {stats.map((stat, index) => (
               <Card key={index} className="border-0 shadow-lg hover:shadow-xl transition-shadow">
-                <CardContent className="p-6">
+                <CardContent className="p-4 sm:p-6">
                   <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-sm text-trusted-text-secondary dark:text-slate-400">{stat.title}</p>
-                      <p className="text-2xl font-bold text-trusted-text-primary dark:text-slate-100">{stat.value}</p>
-                      <div className={`flex items-center space-x-1 text-sm ${
+                    <div className="flex-1 min-w-0">
+                      <p className="text-xs sm:text-sm text-trusted-text-secondary dark:text-slate-400 truncate">{stat.title}</p>
+                      <p className="text-lg sm:text-2xl font-bold text-trusted-text-primary dark:text-slate-100 truncate">{stat.value}</p>
+                      <div className={`flex items-center space-x-1 text-xs sm:text-sm ${
                         stat.changeType === 'positive' ? 'text-trusted-success' : 'text-trusted-error'
                       }`}>
                         {stat.changeType === 'positive' ? (
-                          <ArrowUpRight className="h-4 w-4" />
+                          <ArrowUpRight className="h-3 w-3 sm:h-4 sm:w-4" />
                         ) : (
-                          <ArrowDownRight className="h-4 w-4" />
+                          <ArrowDownRight className="h-3 w-3 sm:h-4 sm:w-4" />
                         )}
                         <span>{stat.change}</span>
                       </div>
                     </div>
-                    <div className={`w-12 h-12 bg-gradient-to-r ${stat.gradient} rounded-lg flex items-center justify-center`}>
-                      <stat.icon className="h-6 w-6 text-white" />
+                    <div className={`w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r ${stat.gradient} rounded-lg flex items-center justify-center flex-shrink-0 ml-3`}>
+                      <stat.icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
                     </div>
                   </div>
                 </CardContent>
@@ -262,39 +307,41 @@ export default function Dashboard() {
           </div>
 
           {/* Quick Actions */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
             <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow cursor-pointer">
-              <CardContent className="p-6">
+              <CardContent className="p-4 sm:p-6">
                 <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="text-lg font-semibold text-trusted-text-primary dark:text-slate-100">Deposit Funds</h3>
-                    <p className="text-sm text-trusted-text-secondary dark:text-slate-400">Add funds to your account</p>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-base sm:text-lg font-semibold text-trusted-text-primary dark:text-slate-100">Deposit Funds</h3>
+                    <p className="text-xs sm:text-sm text-trusted-text-secondary dark:text-slate-400">Add funds to your account</p>
                   </div>
                   <Button 
-                    className="bg-trusted-gold-gradient text-white hover:opacity-90"
+                    className="bg-trusted-gold-gradient text-white hover:opacity-90 text-xs sm:text-sm"
                     onClick={() => setIsDepositDialogOpen(true)}
                   >
-                    <Download className="h-4 w-4 mr-2" />
-                    Deposit
+                    <Download className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                    <span className="hidden sm:inline">Deposit</span>
+                    <span className="sm:hidden">+</span>
                   </Button>
                 </div>
               </CardContent>
             </Card>
 
             <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow cursor-pointer">
-              <CardContent className="p-6">
+              <CardContent className="p-4 sm:p-6">
                 <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="text-lg font-semibold text-trusted-text-primary dark:text-slate-100">Withdraw Funds</h3>
-                    <p className="text-sm text-trusted-text-secondary dark:text-slate-400">Withdraw to your wallet</p>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-base sm:text-lg font-semibold text-trusted-text-primary dark:text-slate-100">Withdraw Funds</h3>
+                    <p className="text-xs sm:text-sm text-trusted-text-secondary dark:text-slate-400">Withdraw to your wallet</p>
                   </div>
                   <Button 
                     variant="outline"
-                    className="border-trusted-gold text-trusted-gold hover:bg-trusted-gold hover:text-white"
+                    className="border-trusted-gold text-trusted-gold hover:bg-trusted-gold hover:text-white text-xs sm:text-sm"
                     onClick={() => setIsWithdrawDialogOpen(true)}
                   >
-                    <Upload className="h-4 w-4 mr-2" />
-                    Withdraw
+                    <Upload className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                    <span className="hidden sm:inline">Withdraw</span>
+                    <span className="sm:hidden">-</span>
                   </Button>
                 </div>
               </CardContent>
@@ -302,7 +349,7 @@ export default function Dashboard() {
           </div>
 
           {/* Tab Content */}
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             {activeTab === 'overview' && <PortfolioOverview />}
             {activeTab === 'trading' && <TradingPanel />}
             {activeTab === 'markets' && <MarketData />}
@@ -316,7 +363,7 @@ export default function Dashboard() {
                     <span>Watchlist</span>
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="p-6">
+                <CardContent className="p-4 sm:p-6">
                   <p className="text-trusted-text-secondary dark:text-slate-400">Watchlist functionality coming soon...</p>
                 </CardContent>
               </Card>
@@ -329,7 +376,7 @@ export default function Dashboard() {
                     <span>Analytics</span>
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="p-6">
+                <CardContent className="p-4 sm:p-6">
                   <p className="text-trusted-text-secondary dark:text-slate-400">Analytics dashboard coming soon...</p>
                 </CardContent>
               </Card>
