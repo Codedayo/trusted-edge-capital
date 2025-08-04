@@ -34,13 +34,18 @@ import {
   Zap,
   Globe,
   Bitcoin,
-  LogOut
+  LogOut,
+  HelpCircle
 } from 'lucide-react';
 import PortfolioOverview from '@/components/dashboard/PortfolioOverview';
 import TradingPanel from '@/components/dashboard/TradingPanel';
 import MarketData from '@/components/dashboard/MarketData';
 import TransactionHistory from '@/components/dashboard/TransactionHistory';
 import CryptoWallet from '@/components/dashboard/CryptoWallet';
+import SecurityDashboard from '@/components/dashboard/SecurityDashboard';
+import LiveMarketData from '@/components/dashboard/LiveMarketData';
+import OnboardingTour from '@/components/ui/onboarding-tour';
+import DemoMode from '@/components/ui/demo-mode';
 import { useAuth } from '@/contexts/AuthContext';
 import { useIsMobile } from '@/hooks/use-mobile';
 
@@ -56,6 +61,8 @@ export default function Dashboard() {
   const [withdrawAsset, setWithdrawAsset] = useState('USDT');
   const [withdrawAddress, setWithdrawAddress] = useState('');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [showOnboarding, setShowOnboarding] = useState(false);
+  const [isDemoModeActive, setIsDemoModeActive] = useState(false);
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
@@ -105,8 +112,9 @@ export default function Dashboard() {
     { id: 'overview', label: 'Overview', icon: Home },
     { id: 'trading', label: 'Trading', icon: TrendingUp },
     { id: 'markets', label: 'Markets', icon: BarChart3 },
+    { id: 'live-data', label: 'Live Data', icon: Activity },
     { id: 'wallet', label: 'Crypto Wallet', icon: Wallet },
-    { id: 'watchlist', label: 'Watchlist', icon: Star },
+    { id: 'security', label: 'Security', icon: Shield },
     { id: 'history', label: 'History', icon: History },
     { id: 'analytics', label: 'Analytics', icon: Activity }
   ];
@@ -139,7 +147,7 @@ export default function Dashboard() {
       .slice(0, 2);
   };
 
-  const isDemoMode = () => {
+  const checkDemoMode = () => {
     return typeof window !== 'undefined' && localStorage.getItem('demoUser');
   };
 
@@ -235,6 +243,16 @@ export default function Dashboard() {
               </Badge>
             </Button>
             
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="p-2"
+              onClick={() => setShowOnboarding(true)}
+              title="Start Tour"
+            >
+              <HelpCircle className="h-4 w-4" />
+            </Button>
+            
             <div className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-trusted-gold-gradient rounded-full flex items-center justify-center">
                 <span className="text-sm font-bold text-white">
@@ -248,7 +266,7 @@ export default function Dashboard() {
                 <p className="text-xs text-trusted-text-secondary dark:text-slate-400">
                   {user?.email}
                 </p>
-                {isDemoMode() && (
+                {checkDemoMode() && (
                   <Badge variant="secondary" className="mt-1 text-xs bg-trusted-gold text-trusted-navy">
                     Demo Mode
                   </Badge>
@@ -353,21 +371,10 @@ export default function Dashboard() {
             {activeTab === 'overview' && <PortfolioOverview />}
             {activeTab === 'trading' && <TradingPanel />}
             {activeTab === 'markets' && <MarketData />}
+            {activeTab === 'live-data' && <LiveMarketData />}
             {activeTab === 'wallet' && <CryptoWallet />}
+            {activeTab === 'security' && <SecurityDashboard />}
             {activeTab === 'history' && <TransactionHistory />}
-            {activeTab === 'watchlist' && (
-              <Card className="border-0 shadow-lg">
-                <CardHeader className="border-b border-slate-200 dark:border-slate-700">
-                  <CardTitle className="flex items-center space-x-2">
-                    <Star className="h-5 w-5 text-trusted-gold" />
-                    <span>Watchlist</span>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="p-4 sm:p-6">
-                  <p className="text-trusted-text-secondary dark:text-slate-400">Watchlist functionality coming soon...</p>
-                </CardContent>
-              </Card>
-            )}
             {activeTab === 'analytics' && (
               <Card className="border-0 shadow-lg">
                 <CardHeader className="border-b border-slate-200 dark:border-slate-700">
@@ -527,6 +534,23 @@ export default function Dashboard() {
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* Onboarding Tour */}
+      <OnboardingTour
+        isOpen={showOnboarding}
+        onClose={() => setShowOnboarding(false)}
+        onComplete={() => setShowOnboarding(false)}
+      />
+
+      {/* Demo Mode */}
+      <DemoMode
+        isActive={isDemoModeActive}
+        onToggle={() => setIsDemoModeActive(!isDemoModeActive)}
+        onReset={() => {
+          // Reset demo data
+          console.log('Demo data reset');
+        }}
+      />
     </div>
   );
 }
