@@ -1,0 +1,196 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 222 47% 11%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 210 40% 96%;
+    --accent-foreground: 222 47% 11%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 222 47% 11%;
+
+    --radius: 0.5rem;
+
+    /* Trusted Edge Capital Professional Theme Colors */
+    --trusted-navy: 220 45% 8%;        /* Deep navy blue */
+    --trusted-navy-light: 220 45% 12%; /* Lighter navy */
+    --trusted-blue: 220 45% 15%;       /* Professional blue */
+    --trusted-blue-light: 220 45% 25%; /* Light blue */
+    --trusted-gold: 42 100% 55%;       /* Rich gold */
+    --trusted-gold-dark: 42 100% 45%;  /* Darker gold */
+    --trusted-gold-light: 42 100% 65%; /* Lighter gold */
+    --trusted-slate: 220 45% 20%;      /* Slate gray */
+    --trusted-gray: 220 14% 96%;       /* Light gray */
+    --trusted-success: 142 76% 36%;    /* Success green */
+    --trusted-warning: 38 92% 50%;     /* Warning orange */
+    --trusted-error: 0 84% 60%;        /* Error red */
+    --trusted-text-primary: 220 45% 8%; /* Primary text */
+    --trusted-text-secondary: 220 45% 25%; /* Secondary text */
+    --trusted-text-muted: 220 45% 40%; /* Muted text */
+
+    --sidebar-background: 220 45% 8%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 42 100% 55%;
+    --sidebar-primary-foreground: 220 45% 8%;
+    --sidebar-accent: 220 45% 12%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 220 45% 12%;
+    --sidebar-ring: 42 100% 55%;
+  }
+
+  .dark {
+    --background: 220 45% 4%;
+    --foreground: 210 40% 98%;
+
+    --card: 220 45% 8%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 220 45% 8%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 42 100% 55%;
+    --primary-foreground: 220 45% 8%;
+
+    --secondary: 220 45% 12%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 220 45% 12%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 220 45% 12%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 45% 12%;
+    --input: 220 45% 12%;
+    --ring: 42 100% 55%;
+
+    /* Trusted Edge Capital Dark Theme Colors */
+    --trusted-navy: 220 45% 4%;        /* Darker navy */
+    --trusted-navy-light: 220 45% 8%;  /* Lighter navy */
+    --trusted-blue: 220 45% 12%;       /* Professional blue */
+    --trusted-blue-light: 220 45% 20%; /* Light blue */
+    --trusted-gold: 42 100% 55%;       /* Rich gold */
+    --trusted-gold-dark: 42 100% 45%;  /* Darker gold */
+    --trusted-gold-light: 42 100% 65%; /* Lighter gold */
+    --trusted-slate: 220 45% 15%;      /* Slate gray */
+    --trusted-gray: 220 14% 96%;       /* Light gray */
+    --trusted-success: 142 76% 36%;    /* Success green */
+    --trusted-warning: 38 92% 50%;     /* Warning orange */
+    --trusted-error: 0 84% 60%;        /* Error red */
+    --trusted-text-primary: 210 40% 98%; /* Primary text */
+    --trusted-text-secondary: 210 40% 85%; /* Secondary text */
+    --trusted-text-muted: 210 40% 65%; /* Muted text */
+
+    --sidebar-background: 220 45% 4%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 42 100% 55%;
+    --sidebar-primary-foreground: 220 45% 8%;
+    --sidebar-accent: 220 45% 8%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 220 45% 8%;
+    --sidebar-ring: 42 100% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+}
+
+/* Custom utility classes for Trusted Edge Capital theme */
+@layer utilities {
+  .bg-trusted-gradient {
+    background: linear-gradient(135deg, hsl(var(--trusted-navy)) 0%, hsl(var(--trusted-blue)) 100%);
+  }
+
+  .bg-trusted-gold-gradient {
+    background: linear-gradient(135deg, hsl(var(--trusted-gold)) 0%, hsl(var(--trusted-gold-dark)) 100%);
+  }
+
+  .bg-trusted-navy-gradient {
+    background: linear-gradient(135deg, hsl(var(--trusted-navy)) 0%, hsl(var(--trusted-navy-light)) 100%);
+  }
+
+  .text-trusted-gold {
+    color: hsl(var(--trusted-gold));
+  }
+
+  .text-trusted-navy {
+    color: hsl(var(--trusted-navy));
+  }
+
+  .text-trusted-blue {
+    color: hsl(var(--trusted-blue));
+  }
+
+  .border-trusted-gold {
+    border-color: hsl(var(--trusted-gold));
+  }
+
+  .border-trusted-navy {
+    border-color: hsl(var(--trusted-navy));
+  }
+
+  .bg-trusted-navy {
+    background-color: hsl(var(--trusted-navy));
+  }
+
+  .bg-trusted-blue {
+    background-color: hsl(var(--trusted-blue));
+  }
+
+  .bg-trusted-gold {
+    background-color: hsl(var(--trusted-gold));
+  }
+
+  .hover\:bg-trusted-navy:hover {
+    background-color: hsl(var(--trusted-navy));
+  }
+
+  .hover\:bg-trusted-blue:hover {
+    background-color: hsl(var(--trusted-blue));
+  }
+
+  .hover\:text-trusted-gold:hover {
+    color: hsl(var(--trusted-gold));
+  }
+
+  .hover\:border-trusted-gold:hover {
+    border-color: hsl(var(--trusted-gold));
+  }
+}
