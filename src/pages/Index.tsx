@@ -202,7 +202,7 @@ export default function Index() {
               <span className="text-slate-900 dark:text-slate-100">
                 Like a Pro
               </span>
-            </h1>
+        </h1>
             
             <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-300 mb-10 max-w-3xl mx-auto leading-relaxed">
               Advanced trading platform for cryptocurrency and stock markets. 
@@ -210,15 +210,15 @@ export default function Index() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12">
-              <Link to="/auth">
+          <Link to="/auth">
                 <Button size="lg" className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white hover:opacity-90 text-lg px-8 py-4 h-14">
-                  Start Trading Now
+              Start Trading Now
                   <ArrowRight className="ml-2 h-6 w-6" />
-                </Button>
-              </Link>
+            </Button>
+          </Link>
               <Button variant="outline" size="lg" className="border-slate-700 text-slate-700 hover:bg-slate-700 hover:text-white text-lg px-8 py-4 h-14">
                 Watch Demo
-              </Button>
+          </Button>
             </div>
 
             {/* Trust Indicators */}
@@ -245,8 +245,8 @@ export default function Index() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-slate-900 dark:text-slate-100">
-              Why Choose Trusted Edge Capital?
-            </h2>
+          Why Choose Trusted Edge Capital?
+        </h2>
             <p className="text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
               Professional-grade trading tools designed for both beginners and experienced traders
             </p>
@@ -388,9 +388,9 @@ export default function Index() {
                     <CheckCircle className="h-5 w-5 text-green-600" />
                     <span className="text-slate-600 dark:text-slate-300">Secure wallet integration</span>
                   </div>
-                </div>
-              </div>
-            </div>
+          </div>
+        </div>
+      </div>
 
             <div className="space-y-8">
               <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-xl">
@@ -463,9 +463,9 @@ export default function Index() {
             and stock trading needs.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Link to="/auth">
+          <Link to="/auth">
               <Button size="lg" className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white hover:opacity-90 text-lg px-8 py-4 h-14">
-                Create Free Account
+              Create Free Account
                 <ArrowRight className="ml-2 h-6 w-6" />
               </Button>
             </Link>
@@ -530,8 +530,8 @@ export default function Index() {
           
           <div className="border-t border-slate-200 dark:border-slate-700 mt-12 pt-8 text-center text-slate-500 dark:text-slate-300">
             <p>&copy; 2024 Trusted Edge Capital. All rights reserved.</p>
-          </div>
         </div>
+      </div>
       </footer>
     </div>
   );
