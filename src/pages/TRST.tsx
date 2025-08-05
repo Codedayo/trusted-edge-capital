@@ -34,6 +34,7 @@ import KYCForm from '@/components/trst/KYCForm';
 import { useAuth } from '@/contexts/AuthContext';
 import { useTRST } from '@/hooks/use-trst';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { Link } from 'react-router-dom';
 
 export default function TRST() {
   const { user } = useAuth();
@@ -119,22 +120,30 @@ export default function TRST() {
       <header className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-md border-b border-slate-200/50 dark:border-slate-700/50 sticky top-0 z-50">
         <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4">
           <div className="flex items-center space-x-3 sm:space-x-4">
-            <img 
-              src="/Trusted Edge Capital Logo.png" 
-              alt="Trusted Edge Capital" 
-              className="h-6 sm:h-8 w-auto"
-            />
-            <div className="hidden sm:block">
-              <h1 className="text-lg sm:text-xl font-bold text-trusted-navy dark:text-slate-100">
-                Trusted Edge Capital
-              </h1>
-              <p className="text-xs sm:text-sm text-trusted-text-secondary dark:text-slate-400">
-                TRST TOKEN
-              </p>
-            </div>
+            <Link to="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+              <img 
+                src="/Trusted Edge Capital Logo.png" 
+                alt="Trusted Edge Capital" 
+                className="h-6 sm:h-8 w-auto"
+              />
+              <div className="hidden sm:block">
+                <h1 className="text-lg sm:text-xl font-bold text-trusted-navy dark:text-slate-100">
+                  Trusted Edge Capital
+                </h1>
+                <p className="text-xs sm:text-sm text-trusted-text-secondary dark:text-slate-400">
+                  TRST TOKEN
+                </p>
+              </div>
+            </Link>
           </div>
 
           <div className="flex items-center space-x-2 sm:space-x-4">
+            <Link to="/">
+              <Button variant="outline" size="sm" className="border-slate-300 text-slate-600 hover:bg-slate-100 dark:border-slate-600 dark:text-slate-300 dark:hover:bg-slate-700">
+                <ArrowRight className="h-4 w-4 mr-2 rotate-180" />
+                Back to Platform
+              </Button>
+            </Link>
             <Badge variant="secondary" className="bg-gradient-to-r from-trusted-gold to-yellow-500 text-trusted-navy animate-pulse">
               <Coins className="h-3 w-3 mr-1" />
               TRST Live

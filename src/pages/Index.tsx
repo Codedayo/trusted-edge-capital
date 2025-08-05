@@ -23,7 +23,11 @@ import {
   Gauge,
   Activity,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  Coins,
+  Sparkles,
+  Timer,
+  TrendingDown
 } from 'lucide-react';
 
 // Trading quotes data
@@ -123,6 +127,12 @@ export default function Index() {
               </div>
             </div>
             <div className="flex items-center space-x-4">
+              <Link to="/trst">
+                <Button variant="outline" className="border-trusted-gold text-trusted-gold hover:bg-trusted-gold hover:text-trusted-navy">
+                  <Coins className="h-4 w-4 mr-2" />
+                  TRST Sale
+                </Button>
+              </Link>
               <Link to="/auth">
                 <Button variant="outline" className="border-slate-700 text-slate-700 hover:bg-slate-700 hover:text-white">
                   Sign In
@@ -234,6 +244,126 @@ export default function Index() {
               <div className="flex items-center space-x-2">
                 <Users className="h-5 w-5 text-blue-600" />
                 <span>50K+ Traders</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* TRST Token Sale Section */}
+      <section className="py-24 bg-gradient-to-br from-trusted-navy via-trusted-blue to-trusted-navy">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <Badge variant="secondary" className="mb-6 bg-gradient-to-r from-trusted-gold to-yellow-500 text-trusted-navy font-semibold">
+              <Sparkles className="h-3 w-3 mr-1" />
+              TRST Token Sale
+            </Badge>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+              Introducing TRST Token
+            </h2>
+            <p className="text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
+              The native token of Trusted Edge Capital platform, designed to revolutionize 
+              decentralized trading and provide exclusive benefits to our community.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left Side - Token Info */}
+            <div className="space-y-8">
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+                <div className="flex items-center space-x-4 mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-r from-trusted-gold to-yellow-500 rounded-xl flex items-center justify-center">
+                    <Coins className="h-8 w-8 text-trusted-navy" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold text-white">TRST Token</h3>
+                    <p className="text-blue-200">Trusted Edge Capital Token</p>
+                  </div>
+                </div>
+                
+                <div className="grid grid-cols-2 gap-6 mb-6">
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-trusted-gold">$0.25</div>
+                    <div className="text-sm text-blue-200">Token Price</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-trusted-gold">100M</div>
+                    <div className="text-sm text-blue-200">Total Supply</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-trusted-gold">$8.8M</div>
+                    <div className="text-sm text-blue-200">Raised</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-trusted-gold">1,247</div>
+                    <div className="text-sm text-blue-200">Participants</div>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="flex items-center space-x-3">
+                    <CheckCircle className="h-5 w-5 text-trusted-gold" />
+                    <span className="text-blue-100">Platform governance and voting rights</span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <CheckCircle className="h-5 w-5 text-trusted-gold" />
+                    <span className="text-blue-100">Reduced trading fees for token holders</span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <CheckCircle className="h-5 w-5 text-trusted-gold" />
+                    <span className="text-blue-100">Exclusive access to new features</span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <CheckCircle className="h-5 w-5 text-trusted-gold" />
+                    <span className="text-blue-100">Staking rewards and passive income</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Side - Sale Progress */}
+            <div className="space-y-8">
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="text-2xl font-bold text-white">Sale Progress</h3>
+                  <Badge className="bg-gradient-to-r from-trusted-success to-green-500 text-white">
+                    <Timer className="h-3 w-3 mr-1" />
+                    Live
+                  </Badge>
+                </div>
+                
+                <div className="space-y-6">
+                  <div>
+                    <div className="flex justify-between text-sm mb-2">
+                      <span className="text-blue-200">Progress</span>
+                      <span className="text-trusted-gold font-semibold">35.2%</span>
+                    </div>
+                    <div className="w-full bg-white/20 rounded-full h-3">
+                      <div className="bg-gradient-to-r from-trusted-gold to-yellow-500 h-3 rounded-full" style={{ width: '35.2%' }}></div>
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="text-center p-4 bg-white/5 rounded-xl">
+                      <div className="text-lg font-bold text-trusted-gold">$25M</div>
+                      <div className="text-sm text-blue-200">Hard Cap</div>
+                    </div>
+                    <div className="text-center p-4 bg-white/5 rounded-xl">
+                      <div className="text-lg font-bold text-trusted-gold">$5M</div>
+                      <div className="text-sm text-blue-200">Soft Cap</div>
+                    </div>
+                  </div>
+                  
+                  <div className="text-center">
+                    <Link to="/trst">
+                      <Button size="lg" className="bg-gradient-to-r from-trusted-gold to-yellow-500 text-trusted-navy hover:from-yellow-500 hover:to-trusted-gold font-bold w-full">
+                        <Coins className="h-4 w-4 mr-2" />
+                        Participate in TRST Sale
+                        <ArrowRight className="h-4 w-4 ml-2" />
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -479,7 +609,7 @@ export default function Index() {
       {/* Footer */}
       <footer className="py-16 border-t bg-white dark:bg-slate-800">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
             <div>
               <div className="flex items-center space-x-3 mb-6">
                 <img 
@@ -504,6 +634,16 @@ export default function Index() {
                 <li>Markets</li>
                 <li>Analytics</li>
                 <li>API</li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 className="font-semibold mb-4 text-slate-900 dark:text-slate-100">TRST Token</h4>
+              <ul className="space-y-2 text-slate-600 dark:text-slate-300">
+                <li><Link to="/trst" className="hover:text-trusted-gold transition-colors">Token Sale</Link></li>
+                <li>Tokenomics</li>
+                <li>Vesting</li>
+                <li>Governance</li>
               </ul>
             </div>
             
