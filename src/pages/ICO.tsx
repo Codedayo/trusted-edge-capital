@@ -137,7 +137,7 @@ export default function ICO() {
           <div className="flex items-center space-x-2 sm:space-x-4">
             <Badge variant="secondary" className="bg-gradient-to-r from-trusted-gold to-yellow-500 text-trusted-navy animate-pulse">
               <Coins className="h-3 w-3 mr-1" />
-              ICO Live
+              TRST Live
             </Badge>
             <Button variant="outline" size="sm" className="border-trusted-gold text-trusted-gold hover:bg-trusted-gold hover:text-trusted-navy hidden sm:flex">
               <FileText className="h-4 w-4 mr-2" />

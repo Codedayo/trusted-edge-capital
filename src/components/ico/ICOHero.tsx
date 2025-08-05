@@ -81,7 +81,7 @@ export default function ICOHero({ icoData }: ICOHeroProps) {
         <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
           <Badge className="bg-gradient-to-r from-trusted-success to-green-500 text-white shadow-lg">
             <Star className="h-3 w-3 mr-1" />
-            ICO LIVE
+            TRST LIVE
           </Badge>
           <Badge variant="outline" className="border-white/80 text-white backdrop-blur-sm bg-white/30 shadow-lg">
             <TrendingUp className="h-3 w-3 mr-1" />
