@@ -67,7 +67,7 @@ export const ICO_CONFIG = {
       percentage: 40,
       amount: 40000000,
       vesting: 'Immediate',
-      description: 'Available during ICO'
+      description: 'Available during TRST Sale'
     },
     {
       category: 'Team & Advisors',

@@ -183,7 +183,7 @@ export default function ICOHero({ icoData }: ICOHeroProps) {
                   ${icoData.tokenPrice}
                 </div>
                 <p className="text-xs sm:text-sm text-white drop-shadow-sm font-medium">
-                  Fixed price during ICO
+                  Fixed price during TRST Sale
                 </p>
               </div>
             </div>

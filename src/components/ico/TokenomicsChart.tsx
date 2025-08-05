@@ -23,7 +23,7 @@ export default function TokenomicsChart() {
       amount: '40,000,000',
       color: 'from-yellow-400 to-trusted-gold',
       bgColor: 'bg-gradient-to-r from-yellow-400 to-trusted-gold',
-      description: 'Available during ICO',
+      description: 'Available during TRST Sale',
       icon: Target
     },
     {

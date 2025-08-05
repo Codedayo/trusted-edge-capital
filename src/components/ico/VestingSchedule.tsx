@@ -238,7 +238,7 @@ export default function VestingSchedule() {
                   <CheckCircle className="h-4 w-4 text-trusted-success" />
                 </div>
                 <div>
-                  <div className="font-medium text-trusted-text-primary dark:text-slate-100">ICO Launch</div>
+                  <div className="font-medium text-trusted-text-primary dark:text-slate-100">TRST Launch</div>
                   <div className="text-sm text-trusted-text-secondary dark:text-slate-400">Public sale tokens unlocked</div>
                 </div>
               </div>
@@ -251,7 +251,7 @@ export default function VestingSchedule() {
                   <Clock className="h-4 w-4 text-trusted-warning" />
                 </div>
                 <div>
-                  <div className="font-medium text-trusted-text-primary dark:text-slate-100">6 Months Post-ICO</div>
+                  <div className="font-medium text-trusted-text-primary dark:text-slate-100">6 Months Post-TRST</div>
                   <div className="text-sm text-trusted-text-secondary dark:text-slate-400">Team & advisors cliff ends</div>
                 </div>
               </div>
@@ -264,7 +264,7 @@ export default function VestingSchedule() {
                   <Lock className="h-4 w-4 text-trusted-text-secondary dark:text-slate-400" />
                 </div>
                 <div>
-                  <div className="font-medium text-trusted-text-primary dark:text-slate-100">12 Months Post-ICO</div>
+                  <div className="font-medium text-trusted-text-primary dark:text-slate-100">12 Months Post-TRST</div>
                   <div className="text-sm text-trusted-text-secondary dark:text-slate-400">Development & marketing vesting</div>
                 </div>
               </div>
@@ -277,7 +277,7 @@ export default function VestingSchedule() {
                   <Lock className="h-4 w-4 text-trusted-text-secondary dark:text-slate-400" />
                 </div>
                 <div>
-                  <div className="font-medium text-trusted-text-primary dark:text-slate-100">24 Months Post-ICO</div>
+                  <div className="font-medium text-trusted-text-primary dark:text-slate-100">24 Months Post-TRST</div>
                   <div className="text-sm text-trusted-text-secondary dark:text-slate-400">Team & advisors fully vested</div>
                 </div>
               </div>
