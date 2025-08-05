@@ -1,60 +1,64 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { API } from '@/lib/api';
-import { Portfolio, Holding } from '@/integrations/supabase/types';
+import { Progress } from '@/components/ui/progress';
 import { 
   TrendingUp, 
   TrendingDown, 
   DollarSign, 
-  Percent, 
-  Eye,
-  EyeOff,
+  Bitcoin,
   BarChart3,
-  PieChart,
+  Star,
+  Sparkles,
   Activity,
-  ArrowUpRight,
-  ArrowDownRight,
-  Shield,
   Target,
   Zap
 } from 'lucide-react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart as RechartsPieChart, Pie, Cell } from 'recharts';
 
-interface PortfolioOverviewProps {
-  className?: string;
-}
-
-export default function PortfolioOverview({ className }: PortfolioOverviewProps) {
-  const [portfolios, setPortfolios] = useState<Portfolio[]>([]);
-  const [holdings, setHoldings] = useState<Holding[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [showValues, setShowValues] = useState(true);
-
-  useEffect(() => {
-    fetchPortfolioData();
-  }, []);
-
-  const fetchPortfolioData = async () => {
-    setLoading(true);
-    try {
-      const [portfoliosData, holdingsData] = await Promise.all([
-        API.Portfolio.getPortfolios(),
-        API.Portfolio.getHoldings()
-      ]);
-      setPortfolios(portfoliosData || []);
-      setHoldings(holdingsData || []);
-    } catch (error) {
-      console.error('Error fetching portfolio data:', error);
-    } finally {
-      setLoading(false);
-    }
+export default function PortfolioOverview() {
+  const portfolioData = {
+    totalValue: 124567.89,
+    totalChange: 8.5,
+    totalChangePercent: 7.2,
+    assets: [
+      {
+        symbol: 'BTC',
+        name: 'Bitcoin',
+        value: 45678.90,
+        change: 12.5,
+        changePercent: 8.3,
+        allocation: 36.7,
+        icon: Bitcoin
+      },
+      {
+        symbol: 'ETH',
+        name: 'Ethereum',
+        value: 34567.89,
+        change: -2.1,
+        changePercent: -1.8,
+        allocation: 27.8,
+        icon: TrendingUp
+      },
+      {
+        symbol: 'USDT',
+        name: 'Tether',
+        value: 23456.78,
+        change: 0.5,
+        changePercent: 0.2,
+        allocation: 18.9,
+        icon: DollarSign
+      },
+      {
+        symbol: 'TRST',
+        name: 'TRST Token',
+        value: 20864.32,
+        change: 25.8,
+        changePercent: 15.2,
+        allocation: 16.6,
+        icon: Star
+      }
+    ]
   };
-
-  const totalValue = portfolios.reduce((sum, portfolio) => sum + (portfolio.balance || 0), 0);
-  const totalPnL = holdings.reduce((sum, holding) => sum + (holding.unrealized_pnl || 0), 0);
-  const totalPnLPercent = totalValue > 0 ? (totalPnL / totalValue) * 100 : 0;
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
@@ -65,309 +69,172 @@ export default function PortfolioOverview({ className }: PortfolioOverviewProps)
     }).format(amount);
   };
 
-  const getPriceChangeColor = (change: number) => {
-    return change >= 0 ? 'text-green-600' : 'text-red-600';
-  };
-
-  const getPriceChangeIcon = (change: number) => {
-    return change >= 0 ? <ArrowUpRight className="h-4 w-4" /> : <ArrowDownRight className="h-4 w-4" />;
-  };
-
-  // Mock data for charts
-  const performanceData = [
-    { date: 'Jan', value: 100000 },
-    { date: 'Feb', value: 105000 },
-    { date: 'Mar', value: 110000 },
-    { date: 'Apr', value: 108000 },
-    { date: 'May', value: 115000 },
-    { date: 'Jun', value: 125430 }
-  ];
-
-  const allocationData = [
-    { name: 'Crypto', value: 45, color: '#f59e0b' },
-    { name: 'Stocks', value: 35, color: '#3b82f6' },
-    { name: 'Cash', value: 15, color: '#10b981' },
-    { name: 'Other', value: 5, color: '#8b5cf6' }
-  ];
-
-  if (loading) {
-    return (
-      <div className={`space-y-4 sm:space-y-6 ${className}`}>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-          {[...Array(4)].map((_, i) => (
-            <Card key={i} className="border-0 shadow-lg">
-              <CardContent className="p-4 sm:p-6">
-                <div className="animate-pulse space-y-3 sm:space-y-4">
-                  <div className="h-3 sm:h-4 bg-slate-200 dark:bg-slate-700 rounded w-1/2"></div>
-                  <div className="h-6 sm:h-8 bg-slate-200 dark:bg-slate-700 rounded w-3/4"></div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className={`space-y-4 sm:space-y-6 ${className}`}>
-      {/* Portfolio Summary Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-        <Card className="border-0 shadow-lg bg-trusted-gradient text-white">
-          <CardContent className="p-4 sm:p-6">
-            <div className="flex items-center justify-between">
-              <div className="flex-1 min-w-0">
-                <p className="text-white/80 text-xs sm:text-sm">Total Portfolio</p>
-                <p className="text-lg sm:text-2xl font-bold truncate">
-                  {showValues ? formatCurrency(totalValue) : '••••••'}
-                </p>
-              </div>
-              <DollarSign className="h-6 w-6 sm:h-8 sm:w-8 text-white/80 flex-shrink-0 ml-3" />
+    <div className="space-y-6">
+      {/* Portfolio Summary */}
+      <Card className="border-0 shadow-xl bg-white/90 dark:bg-slate-800/90 backdrop-blur-md">
+        <CardHeader className="border-b border-slate-200/50 dark:border-slate-700/50">
+          <CardTitle className="flex items-center space-x-2">
+            <div className="p-2 bg-gradient-to-r from-trusted-gold to-yellow-500 rounded-lg">
+              <BarChart3 className="h-5 w-5 text-trusted-navy" />
             </div>
-          </CardContent>
-        </Card>
-
-        <Card className="border-0 shadow-lg bg-gradient-to-r from-green-500 to-green-600 text-white">
-          <CardContent className="p-4 sm:p-6">
-            <div className="flex items-center justify-between">
-              <div className="flex-1 min-w-0">
-                <p className="text-white/80 text-xs sm:text-sm">24h P&L</p>
-                <p className="text-lg sm:text-2xl font-bold truncate">
-                  {showValues ? formatCurrency(totalPnL) : '••••••'}
-                </p>
-                <div className="flex items-center space-x-1 text-xs sm:text-sm">
-                  {getPriceChangeIcon(totalPnLPercent)}
-                  <span>{totalPnLPercent >= 0 ? '+' : ''}{totalPnLPercent.toFixed(2)}%</span>
-                </div>
-              </div>
-              <TrendingUp className="h-6 w-6 sm:h-8 sm:w-8 text-white/80 flex-shrink-0 ml-3" />
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="border-0 shadow-lg bg-gradient-to-r from-orange-500 to-orange-600 text-white">
-          <CardContent className="p-4 sm:p-6">
-            <div className="flex items-center justify-between">
-              <div className="flex-1 min-w-0">
-                <p className="text-white/80 text-xs sm:text-sm">Active Positions</p>
-                <p className="text-lg sm:text-2xl font-bold">{holdings.length}</p>
-              </div>
-              <BarChart3 className="h-6 w-6 sm:h-8 sm:w-8 text-white/80 flex-shrink-0 ml-3" />
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="border-0 shadow-lg bg-gradient-to-r from-purple-500 to-purple-600 text-white">
-          <CardContent className="p-4 sm:p-6">
-            <div className="flex items-center justify-between">
-              <div className="flex-1 min-w-0">
-                <p className="text-white/80 text-xs sm:text-sm">Security Status</p>
-                <div className="flex items-center space-x-1">
-                  <Shield className="h-4 w-4 sm:h-5 sm:w-5 text-trusted-gold" />
-                  <span className="text-sm sm:text-lg font-semibold">Protected</span>
-                </div>
-              </div>
-              <Target className="h-6 w-6 sm:h-8 sm:w-8 text-white/80 flex-shrink-0 ml-3" />
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Charts Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
-        <Card className="border-0 shadow-lg">
-          <CardHeader className="border-b border-slate-200 dark:border-slate-700">
-            <CardTitle className="flex items-center space-x-2 text-sm sm:text-base">
-              <Activity className="h-4 w-4 sm:h-5 sm:w-5 text-trusted-gold" />
-              <span>Portfolio Performance</span>
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="p-4 sm:p-6">
-            <ResponsiveContainer width="100%" height={250} className="sm:h-[300px]">
-              <LineChart data={performanceData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-                <XAxis dataKey="date" stroke="#64748b" />
-                <YAxis stroke="#64748b" />
-                <Tooltip 
-                  contentStyle={{ 
-                    backgroundColor: 'white', 
-                    border: '1px solid #e2e8f0',
-                    borderRadius: '8px'
-                  }}
-                />
-                <Line 
-                  type="monotone" 
-                  dataKey="value" 
-                  stroke="hsl(var(--trusted-gold))" 
-                  strokeWidth={3}
-                  dot={{ fill: "hsl(var(--trusted-gold))", strokeWidth: 2, r: 4 }}
-                />
-              </LineChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
-
-        <Card className="border-0 shadow-lg">
-          <CardHeader className="border-b border-slate-200 dark:border-slate-700">
-            <CardTitle className="flex items-center space-x-2 text-sm sm:text-base">
-              <PieChart className="h-4 w-4 sm:h-5 sm:w-5 text-trusted-gold" />
-              <span>Asset Allocation</span>
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="p-4 sm:p-6">
-            <ResponsiveContainer width="100%" height={250} className="sm:h-[300px]">
-              <RechartsPieChart>
-                <Pie
-                  data={allocationData}
-                  cx="50%"
-                  cy="50%"
-                  innerRadius={50}
-                  outerRadius={80}
-                  paddingAngle={5}
-                  dataKey="value"
-                >
-                  {allocationData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
-                  ))}
-                </Pie>
-                <Tooltip 
-                  contentStyle={{ 
-                    backgroundColor: 'white', 
-                    border: '1px solid #e2e8f0',
-                    borderRadius: '8px'
-                  }}
-                />
-              </RechartsPieChart>
-            </ResponsiveContainer>
-            <div className="grid grid-cols-2 gap-3 sm:gap-4 mt-4">
-              {allocationData.map((item, index) => (
-                <div key={index} className="flex items-center space-x-2">
-                  <div 
-                    className="w-3 h-3 rounded-full" 
-                    style={{ backgroundColor: item.color }}
-                  />
-                  <span className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
-                    {item.name}: {item.value}%
-                  </span>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Holdings Table */}
-      <Card className="border-0 shadow-lg">
-        <CardHeader className="border-b border-slate-200 dark:border-slate-700">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-3 sm:space-y-0">
-            <CardTitle className="flex items-center space-x-2 text-sm sm:text-base">
-              <Zap className="h-4 w-4 sm:h-5 sm:w-5 text-trusted-gold" />
-              <span>Current Holdings</span>
-            </CardTitle>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setShowValues(!showValues)}
-              className="border-trusted-gold text-trusted-gold hover:bg-trusted-gold hover:text-white text-xs sm:text-sm"
-            >
-              {showValues ? <EyeOff className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" /> : <Eye className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />}
-              <span className="hidden sm:inline">{showValues ? 'Hide Values' : 'Show Values'}</span>
-              <span className="sm:hidden">{showValues ? 'Hide' : 'Show'}</span>
-            </Button>
-          </div>
+            <span className="text-trusted-text-primary dark:text-slate-100 drop-shadow-lg">Portfolio Overview</span>
+            <Badge className="bg-gradient-to-r from-trusted-success to-green-500 text-white ml-auto">
+              <Sparkles className="h-3 w-3 mr-1" />
+              Live
+            </Badge>
+          </CardTitle>
         </CardHeader>
-        <CardContent className="p-4 sm:p-6">
-          <div className="space-y-3 sm:space-y-4">
-            {holdings.length > 0 ? (
-              holdings.map((holding) => (
-                <div
-                  key={holding.id}
-                  className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-3 sm:p-4 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
-                >
-                  <div className="flex items-center space-x-3 sm:space-x-4 mb-3 sm:mb-0">
-                    <div className="w-8 h-8 sm:w-10 sm:h-10 bg-trusted-gold-gradient rounded-lg flex items-center justify-center flex-shrink-0">
-                      <DollarSign className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="font-semibold text-slate-900 dark:text-slate-100 text-sm sm:text-base truncate">
-                        {holding.asset?.symbol || 'Unknown'}
-                      </p>
-                      <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 truncate">
-                        {holding.asset?.name || 'Unknown Asset'}
-                      </p>
-                    </div>
-                  </div>
-                  
-                  <div className="text-left sm:text-right">
-                    <p className="font-semibold text-slate-900 dark:text-slate-100 text-sm sm:text-base">
-                      {showValues ? formatCurrency(holding.quantity * (holding.asset?.current_price || 0)) : '••••••'}
-                    </p>
-                    <div className={`flex items-center space-x-1 text-xs sm:text-sm ${getPriceChangeColor(holding.unrealized_pnl || 0)}`}>
-                      {getPriceChangeIcon(holding.unrealized_pnl || 0)}
-                      <span>
-                        {showValues ? formatCurrency(holding.unrealized_pnl || 0) : '••••••'}
-                      </span>
-                    </div>
-                  </div>
+        <CardContent className="p-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Total Portfolio Value */}
+            <div className="bg-gradient-to-r from-trusted-success/15 to-green-500/15 rounded-xl p-6 border border-trusted-success/30">
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="p-2 bg-trusted-success/20 rounded-lg">
+                  <DollarSign className="h-5 w-5 text-trusted-success" />
                 </div>
-              ))
-            ) : (
-              <div className="text-center py-8 sm:py-12">
-                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
-                  <BarChart3 className="h-6 w-6 sm:h-8 sm:w-8 text-slate-400" />
+                <div>
+                  <div className="text-sm font-medium text-trusted-text-primary dark:text-slate-100 drop-shadow-sm">Total Portfolio</div>
+                  <div className="text-xs text-trusted-text-secondary dark:text-slate-400 drop-shadow-sm">Current Value</div>
                 </div>
-                <p className="text-base sm:text-lg font-medium text-slate-900 dark:text-slate-100 mb-2">No holdings yet</p>
-                <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Start trading to see your holdings here</p>
               </div>
-            )}
+              <div className="text-3xl font-bold text-trusted-text-primary dark:text-slate-100 drop-shadow-lg">
+                {formatCurrency(portfolioData.totalValue)}
+              </div>
+              <div className={`flex items-center space-x-1 mt-2 ${
+                portfolioData.totalChange >= 0 ? 'text-trusted-success' : 'text-trusted-error'
+              }`}>
+                {portfolioData.totalChange >= 0 ? (
+                  <TrendingUp className="h-4 w-4" />
+                ) : (
+                  <TrendingDown className="h-4 w-4" />
+                )}
+                <span className="font-medium drop-shadow-sm">
+                  {portfolioData.totalChange >= 0 ? '+' : ''}{portfolioData.totalChangePercent}%
+                </span>
+              </div>
+            </div>
+
+            {/* 24h Performance */}
+            <div className="bg-gradient-to-r from-trusted-gold/15 to-yellow-500/15 rounded-xl p-6 border border-trusted-gold/30">
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="p-2 bg-trusted-gold/20 rounded-lg">
+                  <Activity className="h-5 w-5 text-trusted-gold" />
+                </div>
+                <div>
+                  <div className="text-sm font-medium text-trusted-text-primary dark:text-slate-100 drop-shadow-sm">24h Performance</div>
+                  <div className="text-xs text-trusted-text-secondary dark:text-slate-400 drop-shadow-sm">Today's Change</div>
+                </div>
+              </div>
+              <div className="text-3xl font-bold text-trusted-text-primary dark:text-slate-100 drop-shadow-lg">
+                {formatCurrency(portfolioData.totalChange * 1000)}
+              </div>
+              <div className="flex items-center space-x-1 mt-2 text-trusted-success">
+                <TrendingUp className="h-4 w-4" />
+                <span className="font-medium drop-shadow-sm">+{portfolioData.totalChangePercent}%</span>
+              </div>
+            </div>
+
+            {/* Asset Allocation */}
+            <div className="bg-gradient-to-r from-trusted-blue/15 to-trusted-navy/15 rounded-xl p-6 border border-trusted-blue/30">
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="p-2 bg-trusted-blue/20 rounded-lg">
+                  <Target className="h-5 w-5 text-trusted-blue" />
+                </div>
+                <div>
+                  <div className="text-sm font-medium text-trusted-text-primary dark:text-slate-100 drop-shadow-sm">Asset Allocation</div>
+                  <div className="text-xs text-trusted-text-secondary dark:text-slate-400 drop-shadow-sm">Diversified Portfolio</div>
+                </div>
+              </div>
+              <div className="text-3xl font-bold text-trusted-text-primary dark:text-slate-100 drop-shadow-lg">
+                {portfolioData.assets.length}
+              </div>
+              <div className="text-sm text-trusted-text-secondary dark:text-slate-400 mt-2 drop-shadow-sm">
+                Active Assets
+              </div>
+            </div>
           </div>
         </CardContent>
       </Card>
 
-      {/* Quick Actions */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-        <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow cursor-pointer">
-          <CardContent className="p-4 sm:p-6">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-trusted-gold-gradient rounded-lg flex items-center justify-center flex-shrink-0">
-                <TrendingUp className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <h3 className="font-semibold text-slate-900 dark:text-slate-100 text-sm sm:text-base">Start Trading</h3>
-                <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Buy and sell assets</p>
-              </div>
+      {/* Asset Breakdown */}
+      <Card className="border-0 shadow-xl bg-white/90 dark:bg-slate-800/90 backdrop-blur-md">
+        <CardHeader className="border-b border-slate-200/50 dark:border-slate-700/50">
+          <CardTitle className="flex items-center space-x-2">
+            <div className="p-2 bg-gradient-to-r from-trusted-gold to-yellow-500 rounded-lg">
+              <Zap className="h-5 w-5 text-trusted-navy" />
             </div>
-          </CardContent>
-        </Card>
+            <span className="text-trusted-text-primary dark:text-slate-100 drop-shadow-lg">Asset Breakdown</span>
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="p-6">
+          <div className="space-y-4">
+            {portfolioData.assets.map((asset, index) => {
+              const Icon = asset.icon;
+              return (
+                <div
+                  key={index}
+                  className="flex items-center justify-between p-4 bg-gradient-to-r from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-700 rounded-xl border border-slate-200/60 dark:border-slate-700/60 hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                >
+                  <div className="flex items-center space-x-4">
+                    <div className="w-10 h-10 bg-gradient-to-r from-trusted-gold to-yellow-500 rounded-full flex items-center justify-center shadow-lg">
+                      <Icon className="h-5 w-5 text-trusted-navy" />
+                    </div>
+                    <div>
+                      <div className="flex items-center space-x-2">
+                        <span className="font-semibold text-trusted-text-primary dark:text-slate-100 drop-shadow-sm">{asset.symbol}</span>
+                        <Badge variant="secondary" className="text-xs">
+                          {asset.allocation.toFixed(1)}%
+                        </Badge>
+                      </div>
+                      <div className="text-sm text-trusted-text-secondary dark:text-slate-400 drop-shadow-sm">{asset.name}</div>
+                    </div>
+                  </div>
+                  
+                  <div className="text-right">
+                    <div className="text-lg font-semibold text-trusted-text-primary dark:text-slate-100 drop-shadow-sm">
+                      {formatCurrency(asset.value)}
+                    </div>
+                    <div className={`flex items-center space-x-1 text-sm ${
+                      asset.change >= 0 ? 'text-trusted-success' : 'text-trusted-error'
+                    }`}>
+                      {asset.change >= 0 ? (
+                        <TrendingUp className="h-3 w-3" />
+                      ) : (
+                        <TrendingDown className="h-3 w-3" />
+                      )}
+                      <span className="drop-shadow-sm">
+                        {asset.change >= 0 ? '+' : ''}{asset.changePercent}%
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
 
-        <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow cursor-pointer">
-          <CardContent className="p-4 sm:p-6">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                <DollarSign className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <h3 className="font-semibold text-slate-900 dark:text-slate-100 text-sm sm:text-base">Deposit Funds</h3>
-                <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Add money to your account</p>
-              </div>
+          {/* Allocation Chart */}
+          <div className="mt-6">
+            <h3 className="text-lg font-semibold mb-4 text-trusted-text-primary dark:text-slate-100 drop-shadow-lg">
+              Portfolio Allocation
+            </h3>
+            <div className="space-y-3">
+              {portfolioData.assets.map((asset, index) => (
+                <div key={index} className="space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-trusted-text-primary dark:text-slate-100 drop-shadow-sm">{asset.symbol}</span>
+                    <span className="text-trusted-text-secondary dark:text-slate-400 drop-shadow-sm">{asset.allocation.toFixed(1)}%</span>
+                  </div>
+                  <Progress 
+                    value={asset.allocation} 
+                    className="h-2 bg-slate-200 dark:bg-slate-700"
+                  />
+                </div>
+              ))}
             </div>
-          </CardContent>
-        </Card>
-
-        <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow cursor-pointer sm:col-span-2 lg:col-span-1">
-          <CardContent className="p-4 sm:p-6">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-green-500 to-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                <Shield className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <h3 className="font-semibold text-slate-900 dark:text-slate-100 text-sm sm:text-base">Security</h3>
-                <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Manage your security</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }

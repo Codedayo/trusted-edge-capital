@@ -7,6 +7,7 @@ import { AuthProvider, useAuth } from "@/contexts/AuthContext";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
+import ICO from "./pages/ICO";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ function AppRoutes() {
     <Routes>
       <Route path="/auth" element={user ? <Dashboard /> : <Auth />} />
       <Route path="/dashboard" element={user ? <Dashboard /> : <Auth />} />
+      <Route path="/ico" element={<ICO />} />
       <Route path="/" element={user ? <Dashboard /> : <Index />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
