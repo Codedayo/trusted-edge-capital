@@ -23,7 +23,9 @@ import {
   Globe,
   Sparkles,
   Menu,
-  X
+  X,
+  Sun,
+  Moon
 } from 'lucide-react';
 import PortfolioOverview from '@/components/dashboard/PortfolioOverview';
 import LiveMarketData from '@/components/dashboard/LiveMarketData';
@@ -40,6 +42,17 @@ export default function Dashboard() {
   const isMobile = useIsMobile();
   const [activeTab, setActiveTab] = useState('overview');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  // Dark mode toggle function
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+    if (!isDarkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  };
 
   const quickStats = [
     {
@@ -144,6 +157,20 @@ export default function Dashboard() {
           </div>
 
           <div className="flex items-center space-x-2 sm:space-x-4">
+            {/* Dark Mode Toggle */}
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={toggleDarkMode}
+              className="border-slate-300 text-slate-600 hover:bg-slate-100 dark:border-slate-600 dark:text-slate-300 dark:hover:bg-slate-700 transition-all duration-300"
+            >
+              {isDarkMode ? (
+                <Sun className="h-4 w-4" />
+              ) : (
+                <Moon className="h-4 w-4" />
+              )}
+            </Button>
+            
             <Badge variant="secondary" className="bg-gradient-to-r from-trusted-success to-green-500 text-white shadow-lg">
               <Star className="h-3 w-3 mr-1" />
               Live Trading

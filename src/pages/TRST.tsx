@@ -24,7 +24,9 @@ import {
   ExternalLink,
   Menu,
   X,
-  ArrowRight
+  ArrowRight,
+  Sun,
+  Moon
 } from 'lucide-react';
 import TRSTHero from '@/components/trst/TRSTHero';
 import TokenSaleSummary from '@/components/trst/TokenSaleSummary';
@@ -42,7 +44,18 @@ export default function TRST() {
   const isMobile = useIsMobile();
   const [activeTab, setActiveTab] = useState('overview');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const { icoData, userParticipation, connectWallet, buyTokens, submitKYC, getSaleStats, canParticipate, isSaleActive } = useTRST();
+
+  // Dark mode toggle function
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+    if (!isDarkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  };
 
   const stats = [
     {
@@ -139,6 +152,20 @@ export default function TRST() {
           </div>
 
           <div className="flex items-center space-x-2 sm:space-x-4">
+            {/* Dark Mode Toggle */}
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={toggleDarkMode}
+              className="border-slate-300 text-slate-600 hover:bg-slate-100 dark:border-slate-600 dark:text-slate-300 dark:hover:bg-slate-700 transition-all duration-300"
+            >
+              {isDarkMode ? (
+                <Sun className="h-4 w-4" />
+              ) : (
+                <Moon className="h-4 w-4" />
+              )}
+            </Button>
+            
             <Link to="/">
               <Button variant="outline" size="sm" className="border-slate-300 text-slate-600 hover:bg-slate-100 dark:border-slate-600 dark:text-slate-300 dark:hover:bg-slate-700">
                 <ArrowRight className="h-4 w-4 mr-2 rotate-180" />
@@ -146,7 +173,7 @@ export default function TRST() {
               </Button>
             </Link>
             <Badge variant="secondary" className="bg-gradient-to-r from-trusted-gold to-yellow-500 text-trusted-navy animate-pulse">
-              <Coins className="h-3 w-3 mr-1" />
+              <Coins className="h-4 w-4 mr-1" />
               TRST Live
             </Badge>
             <Button variant="outline" size="sm" className="border-trusted-gold text-trusted-gold hover:bg-trusted-gold hover:text-trusted-navy hidden sm:flex">
