@@ -78,7 +78,7 @@ export default function PortfolioOverview() {
             <div className="p-2 bg-gradient-to-r from-trusted-gold to-yellow-500 rounded-lg">
               <BarChart3 className="h-5 w-5 text-trusted-navy" />
             </div>
-            <span className="text-trusted-text-primary dark:text-slate-100 drop-shadow-lg">Portfolio Overview</span>
+            <span className="text-slate-900 dark:text-slate-100 drop-shadow-lg">Portfolio Overview</span>
             <Badge className="bg-gradient-to-r from-trusted-success to-green-500 text-white ml-auto">
               <Sparkles className="h-3 w-3 mr-1" />
               Live
@@ -94,13 +94,13 @@ export default function PortfolioOverview() {
                   <DollarSign className="h-5 w-5 text-trusted-success" />
                 </div>
                 <div>
-                  <div className="text-sm font-medium text-trusted-text-primary dark:text-slate-100 drop-shadow-sm">Total Portfolio</div>
-                  <div className="text-xs text-trusted-text-secondary dark:text-slate-400 drop-shadow-sm">Current Value</div>
+                  <div className="text-sm font-medium text-slate-900 dark:text-slate-100 drop-shadow-sm">Total Portfolio</div>
+                  <div className="text-xs text-slate-600 dark:text-slate-400 drop-shadow-sm">Current Value</div>
                 </div>
               </div>
-              <div className="text-3xl font-bold text-trusted-text-primary dark:text-slate-100 drop-shadow-lg">
-                {formatCurrency(portfolioData.totalValue)}
-              </div>
+                              <div className="text-3xl font-bold text-slate-900 dark:text-slate-100 drop-shadow-lg">
+                  {formatCurrency(portfolioData.totalValue)}
+                </div>
               <div className={`flex items-center space-x-1 mt-2 ${
                 portfolioData.totalChange >= 0 ? 'text-trusted-success' : 'text-trusted-error'
               }`}>
@@ -122,11 +122,11 @@ export default function PortfolioOverview() {
                   <Activity className="h-5 w-5 text-trusted-gold" />
                 </div>
                 <div>
-                  <div className="text-sm font-medium text-trusted-text-primary dark:text-slate-100 drop-shadow-sm">24h Performance</div>
-                  <div className="text-xs text-trusted-text-secondary dark:text-slate-400 drop-shadow-sm">Today's Change</div>
+                  <div className="text-sm font-medium text-slate-900 dark:text-slate-100 drop-shadow-sm">24h Performance</div>
+                  <div className="text-xs text-slate-600 dark:text-slate-400 drop-shadow-sm">Today's Change</div>
                 </div>
               </div>
-              <div className="text-3xl font-bold text-trusted-text-primary dark:text-slate-100 drop-shadow-lg">
+              <div className="text-3xl font-bold text-slate-900 dark:text-slate-100 drop-shadow-lg">
                 {formatCurrency(portfolioData.totalChange * 1000)}
               </div>
               <div className="flex items-center space-x-1 mt-2 text-trusted-success">
@@ -142,14 +142,14 @@ export default function PortfolioOverview() {
                   <Target className="h-5 w-5 text-trusted-blue" />
                 </div>
                 <div>
-                  <div className="text-sm font-medium text-trusted-text-primary dark:text-slate-100 drop-shadow-sm">Asset Allocation</div>
-                  <div className="text-xs text-trusted-text-secondary dark:text-slate-400 drop-shadow-sm">Diversified Portfolio</div>
+                  <div className="text-sm font-medium text-slate-900 dark:text-slate-100 drop-shadow-sm">Asset Allocation</div>
+                  <div className="text-xs text-slate-600 dark:text-slate-400 drop-shadow-sm">Diversified Portfolio</div>
                 </div>
               </div>
-              <div className="text-3xl font-bold text-trusted-text-primary dark:text-slate-100 drop-shadow-lg">
+              <div className="text-3xl font-bold text-slate-900 dark:text-slate-100 drop-shadow-lg">
                 {portfolioData.assets.length}
               </div>
-              <div className="text-sm text-trusted-text-secondary dark:text-slate-400 mt-2 drop-shadow-sm">
+              <div className="text-sm text-slate-600 dark:text-slate-400 mt-2 drop-shadow-sm">
                 Active Assets
               </div>
             </div>
@@ -164,7 +164,7 @@ export default function PortfolioOverview() {
             <div className="p-2 bg-gradient-to-r from-trusted-gold to-yellow-500 rounded-lg">
               <Zap className="h-5 w-5 text-trusted-navy" />
             </div>
-            <span className="text-trusted-text-primary dark:text-slate-100 drop-shadow-lg">Asset Breakdown</span>
+            <span className="text-slate-900 dark:text-slate-100 drop-shadow-lg">Asset Breakdown</span>
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6">
@@ -182,17 +182,17 @@ export default function PortfolioOverview() {
                     </div>
                     <div>
                       <div className="flex items-center space-x-2">
-                        <span className="font-semibold text-trusted-text-primary dark:text-slate-100 drop-shadow-sm">{asset.symbol}</span>
+                        <span className="font-semibold text-slate-900 dark:text-slate-100 drop-shadow-sm">{asset.symbol}</span>
                         <Badge variant="secondary" className="text-xs">
                           {asset.allocation.toFixed(1)}%
                         </Badge>
                       </div>
-                      <div className="text-sm text-trusted-text-secondary dark:text-slate-400 drop-shadow-sm">{asset.name}</div>
+                      <div className="text-sm text-slate-600 dark:text-slate-400 drop-shadow-sm">{asset.name}</div>
                     </div>
                   </div>
                   
                   <div className="text-right">
-                    <div className="text-lg font-semibold text-trusted-text-primary dark:text-slate-100 drop-shadow-sm">
+                    <div className="text-lg font-semibold text-slate-900 dark:text-slate-100 drop-shadow-sm">
                       {formatCurrency(asset.value)}
                     </div>
                     <div className={`flex items-center space-x-1 text-sm ${
@@ -215,7 +215,7 @@ export default function PortfolioOverview() {
 
           {/* Allocation Chart */}
           <div className="mt-6">
-            <h3 className="text-lg font-semibold mb-4 text-trusted-text-primary dark:text-slate-100 drop-shadow-lg">
+            <h3 className="text-lg font-semibold mb-4 text-slate-900 dark:text-slate-100 drop-shadow-lg">
               Portfolio Allocation
             </h3>
             <div className="space-y-3">

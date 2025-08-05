@@ -84,7 +84,7 @@ export default function Dashboard() {
     { id: 'security', label: 'Security', icon: Shield },
     { id: 'history', label: 'History', icon: History },
     { id: 'analytics', label: 'Analytics', icon: Activity },
-    { id: 'ico', label: 'TRST COIN', icon: Coins, external: true, href: '/ico' }
+    { id: 'trst', label: 'TRST TOKEN', icon: Coins, external: true, href: '/trst' }
   ];
 
   const NavigationSidebar = () => (
@@ -97,7 +97,7 @@ export default function Dashboard() {
             className={`w-full justify-start h-auto p-3 ${
               activeTab === item.id 
                 ? 'bg-gradient-to-r from-trusted-gold to-yellow-500 text-trusted-navy shadow-lg' 
-                : 'hover:bg-slate-100 dark:hover:bg-slate-700 text-trusted-text-primary dark:text-slate-100'
+                : 'hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-900 dark:text-slate-100'
             }`}
             onClick={() => {
               if (item.external && item.href) {
@@ -134,10 +134,10 @@ export default function Dashboard() {
               className="h-6 sm:h-8 w-auto"
             />
             <div className="hidden sm:block">
-              <h1 className="text-lg sm:text-xl font-bold text-trusted-navy dark:text-slate-100 drop-shadow-sm">
+              <h1 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 drop-shadow-sm">
                 Trusted Edge Capital
               </h1>
-              <p className="text-xs sm:text-sm text-trusted-text-secondary dark:text-slate-400 drop-shadow-sm">
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 drop-shadow-sm">
                 Professional Trading Platform
               </p>
             </div>
@@ -150,10 +150,10 @@ export default function Dashboard() {
             </Badge>
             <div className="flex items-center space-x-2">
               <div className="text-right hidden sm:block">
-                <div className="text-sm font-medium text-trusted-text-primary dark:text-slate-100 drop-shadow-sm">
+                <div className="text-sm font-medium text-slate-900 dark:text-slate-100 drop-shadow-sm">
                   {user?.email}
                 </div>
-                <div className="text-xs text-trusted-text-secondary dark:text-slate-400 drop-shadow-sm">
+                <div className="text-xs text-slate-600 dark:text-slate-400 drop-shadow-sm">
                   Premium Member
                 </div>
               </div>
@@ -184,10 +184,10 @@ export default function Dashboard() {
                             className="h-6 w-auto"
                           />
                           <div>
-                            <h1 className="text-sm font-bold text-trusted-navy dark:text-slate-100">
+                            <h1 className="text-sm font-bold text-slate-900 dark:text-slate-100">
                               Trusted Edge Capital
                             </h1>
-                            <p className="text-xs text-trusted-text-secondary dark:text-slate-400">
+                            <p className="text-xs text-slate-600 dark:text-slate-400">
                               Professional Trading Platform
                             </p>
                           </div>
