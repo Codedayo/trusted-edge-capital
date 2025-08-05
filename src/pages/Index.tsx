@@ -127,14 +127,8 @@ export default function Index() {
               </div>
             </div>
             <div className="flex items-center space-x-4">
-              <Link to="/trst">
-                <Button variant="outline" className="border-trusted-gold text-trusted-gold hover:bg-trusted-gold hover:text-trusted-navy">
-                  <Coins className="h-4 w-4 mr-2" />
-                  TRST Sale
-                </Button>
-              </Link>
               <Link to="/auth">
-                <Button variant="outline" className="border-slate-700 text-slate-700 hover:bg-slate-700 hover:text-white">
+                <Button variant="outline" className="border-slate-700 text-slate-700 hover:bg-slate-700 hover:text-white dark:border-slate-300 dark:text-slate-300 dark:hover:bg-slate-600">
                   Sign In
                 </Button>
               </Link>
@@ -191,15 +185,15 @@ export default function Index() {
                 {/* Navigation Arrows */}
                 <button
                   onClick={prevQuote}
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 p-2 rounded-full bg-white/20 hover:bg-white/40 transition-all duration-300 backdrop-blur-sm"
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2 p-2 rounded-full bg-white/80 hover:bg-white transition-all duration-300 backdrop-blur-sm shadow-lg"
                 >
-                  <ChevronLeft className="h-5 w-5 text-slate-700" />
+                  <ChevronLeft className="h-5 w-5 text-slate-900" />
                 </button>
                 <button
                   onClick={nextQuote}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 p-2 rounded-full bg-white/20 hover:bg-white/40 transition-all duration-300 backdrop-blur-sm"
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 p-2 rounded-full bg-white/80 hover:bg-white transition-all duration-300 backdrop-blur-sm shadow-lg"
                 >
-                  <ChevronRight className="h-5 w-5 text-slate-700" />
+                  <ChevronRight className="h-5 w-5 text-slate-900" />
                 </button>
               </div>
             </div>
@@ -219,16 +213,27 @@ export default function Index() {
               Professional tools, real-time data, and secure trading environment.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center mb-8">
           <Link to="/auth">
                 <Button size="lg" className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white hover:opacity-90 text-lg px-8 py-4 h-14">
               Start Trading Now
                   <ArrowRight className="ml-2 h-6 w-6" />
             </Button>
           </Link>
-              <Button variant="outline" size="lg" className="border-slate-700 text-slate-700 hover:bg-slate-700 hover:text-white text-lg px-8 py-4 h-14">
+              <Button variant="outline" size="lg" className="border-slate-700 text-slate-700 hover:bg-slate-700 hover:text-white dark:border-slate-300 dark:text-slate-300 dark:hover:bg-slate-600 text-lg px-8 py-4 h-14">
                 Watch Demo
           </Button>
+            </div>
+            
+            {/* TRST Sale Button */}
+            <div className="text-center mb-12">
+              <Link to="/trst">
+                <Button size="lg" className="bg-gradient-to-r from-trusted-gold to-yellow-500 text-trusted-navy hover:from-yellow-500 hover:to-trusted-gold font-bold text-lg px-8 py-4 h-14 shadow-lg">
+                  <Coins className="h-5 w-5 mr-2" />
+                  Join TRST Token Sale
+                  <ArrowRight className="h-5 w-5 ml-2" />
+                </Button>
+              </Link>
             </div>
 
             {/* Trust Indicators */}
@@ -261,7 +266,7 @@ export default function Index() {
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
               Introducing TRST Token
             </h2>
-            <p className="text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-white max-w-3xl mx-auto leading-relaxed">
               The native token of Trusted Edge Capital platform, designed to revolutionize 
               decentralized trading and provide exclusive benefits to our community.
             </p>
@@ -277,45 +282,45 @@ export default function Index() {
                   </div>
                   <div>
                     <h3 className="text-2xl font-bold text-white">TRST Token</h3>
-                    <p className="text-blue-200">Trusted Edge Capital Token</p>
+                    <p className="text-white">Trusted Edge Capital Token</p>
                   </div>
                 </div>
                 
                 <div className="grid grid-cols-2 gap-6 mb-6">
                   <div className="text-center">
                     <div className="text-2xl font-bold text-trusted-gold">$0.25</div>
-                    <div className="text-sm text-blue-200">Token Price</div>
+                    <div className="text-sm text-white">Token Price</div>
                   </div>
                   <div className="text-center">
                     <div className="text-2xl font-bold text-trusted-gold">100M</div>
-                    <div className="text-sm text-blue-200">Total Supply</div>
+                    <div className="text-sm text-white">Total Supply</div>
                   </div>
                   <div className="text-center">
                     <div className="text-2xl font-bold text-trusted-gold">$8.8M</div>
-                    <div className="text-sm text-blue-200">Raised</div>
+                    <div className="text-sm text-white">Raised</div>
                   </div>
                   <div className="text-center">
                     <div className="text-2xl font-bold text-trusted-gold">1,247</div>
-                    <div className="text-sm text-blue-200">Participants</div>
+                    <div className="text-sm text-white">Participants</div>
                   </div>
                 </div>
 
                 <div className="space-y-4">
                   <div className="flex items-center space-x-3">
                     <CheckCircle className="h-5 w-5 text-trusted-gold" />
-                    <span className="text-blue-100">Platform governance and voting rights</span>
+                    <span className="text-white">Platform governance and voting rights</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <CheckCircle className="h-5 w-5 text-trusted-gold" />
-                    <span className="text-blue-100">Reduced trading fees for token holders</span>
+                    <span className="text-white">Reduced trading fees for token holders</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <CheckCircle className="h-5 w-5 text-trusted-gold" />
-                    <span className="text-blue-100">Exclusive access to new features</span>
+                    <span className="text-white">Exclusive access to new features</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <CheckCircle className="h-5 w-5 text-trusted-gold" />
-                    <span className="text-blue-100">Staking rewards and passive income</span>
+                    <span className="text-white">Staking rewards and passive income</span>
                   </div>
                 </div>
               </div>
@@ -335,7 +340,7 @@ export default function Index() {
                 <div className="space-y-6">
                   <div>
                     <div className="flex justify-between text-sm mb-2">
-                      <span className="text-blue-200">Progress</span>
+                      <span className="text-white">Progress</span>
                       <span className="text-trusted-gold font-semibold">35.2%</span>
                     </div>
                     <div className="w-full bg-white/20 rounded-full h-3">
@@ -346,11 +351,11 @@ export default function Index() {
                   <div className="grid grid-cols-2 gap-4">
                     <div className="text-center p-4 bg-white/5 rounded-xl">
                       <div className="text-lg font-bold text-trusted-gold">$25M</div>
-                      <div className="text-sm text-blue-200">Hard Cap</div>
+                      <div className="text-sm text-white">Hard Cap</div>
                     </div>
                     <div className="text-center p-4 bg-white/5 rounded-xl">
                       <div className="text-lg font-bold text-trusted-gold">$5M</div>
-                      <div className="text-sm text-blue-200">Soft Cap</div>
+                      <div className="text-sm text-white">Soft Cap</div>
                     </div>
                   </div>
                   
@@ -588,7 +593,7 @@ export default function Index() {
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">
             Ready to Start Trading?
           </h2>
-          <p className="text-xl text-blue-100 mb-10 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-white mb-10 max-w-3xl mx-auto leading-relaxed">
             Join thousands of traders who trust our platform for their cryptocurrency 
             and stock trading needs.
           </p>
