@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { ICO_CONFIG, formatCurrency, calculateTokens, calculateProgress, isSaleActive, getTimeRemaining } from '@/lib/ico-config';
+import { TRST_CONFIG, formatCurrency, calculateTokens, calculateProgress, isSaleActive, getTimeRemaining } from '@/lib/trst-config';
 
 // Extend Window interface for ethereum
 declare global {
@@ -12,7 +12,7 @@ declare global {
   }
 }
 
-export interface ICOData {
+export interface TRSTData {
   tokenName: string;
   tokenSymbol: string;
   tokenPrice: number;
@@ -49,18 +49,18 @@ export interface TransactionStatus {
   success: boolean;
 }
 
-export const useICO = () => {
-  const [icoData, setIcoData] = useState<ICOData>({
-    tokenName: ICO_CONFIG.token.name,
-    tokenSymbol: ICO_CONFIG.token.symbol,
-    tokenPrice: ICO_CONFIG.token.price,
-    maxSupply: ICO_CONFIG.token.maxSupply,
-    softCap: ICO_CONFIG.sale.softCap,
-    hardCap: ICO_CONFIG.sale.hardCap,
+export const useTRST = () => {
+  const [icoData, setIcoData] = useState<TRSTData>({
+    tokenName: TRST_CONFIG.token.name,
+    tokenSymbol: TRST_CONFIG.token.symbol,
+    tokenPrice: TRST_CONFIG.token.price,
+    maxSupply: TRST_CONFIG.token.maxSupply,
+    softCap: TRST_CONFIG.sale.softCap,
+    hardCap: TRST_CONFIG.sale.hardCap,
     totalRaised: 8750000, // Mock data - replace with actual contract data
     participants: 1247, // Mock data - replace with actual contract data
     timeRemaining: getTimeRemaining(),
-    acceptedTokens: ICO_CONFIG.acceptedTokens.map(token => ({
+    acceptedTokens: TRST_CONFIG.acceptedTokens.map(token => ({
       symbol: token.symbol,
       name: token.name,
       icon: token.icon
@@ -110,8 +110,8 @@ export const useICO = () => {
         
         // Check if we're on the correct network
         const chainId = await window.ethereum.request({ method: 'eth_chainId' });
-        if (chainId !== `0x${ICO_CONFIG.network.chainId.toString(16)}`) {
-          throw new Error(`Please switch to ${ICO_CONFIG.network.name}`);
+        if (chainId !== `0x${TRST_CONFIG.network.chainId.toString(16)}`) {
+          throw new Error(`Please switch to ${TRST_CONFIG.network.name}`);
         }
 
         setUserParticipation(prev => ({
@@ -160,12 +160,12 @@ export const useICO = () => {
       throw new Error('KYC verification required before purchasing tokens');
     }
 
-    if (amount < ICO_CONFIG.sale.minPurchase) {
-      throw new Error(`Minimum purchase amount is ${formatCurrency(ICO_CONFIG.sale.minPurchase)}`);
+    if (amount < TRST_CONFIG.sale.minPurchase) {
+      throw new Error(`Minimum purchase amount is ${formatCurrency(TRST_CONFIG.sale.minPurchase)}`);
     }
 
-    if (amount > ICO_CONFIG.sale.maxPurchase) {
-      throw new Error(`Maximum purchase amount is ${formatCurrency(ICO_CONFIG.sale.maxPurchase)}`);
+    if (amount > TRST_CONFIG.sale.maxPurchase) {
+      throw new Error(`Maximum purchase amount is ${formatCurrency(TRST_CONFIG.sale.maxPurchase)}`);
     }
 
     setTransactionStatus({

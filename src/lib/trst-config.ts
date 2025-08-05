@@ -1,5 +1,5 @@
-// ICO Configuration - Modify these values for your token sale
-export const ICO_CONFIG = {
+// TRST Configuration - Modify these values for your token sale
+export const TRST_CONFIG = {
   // Token Information
   token: {
     name: 'TRST',
@@ -48,7 +48,7 @@ export const ICO_CONFIG = {
   // Smart Contract Addresses (Replace with actual addresses)
   contracts: {
     tokenAddress: '0x0000000000000000000000000000000000000000', // TRST token contract
-    saleAddress: '0x0000000000000000000000000000000000000000', // ICO sale contract
+    saleAddress: '0x0000000000000000000000000000000000000000', // TRST sale contract
     treasuryAddress: '0x0000000000000000000000000000000000000000', // Treasury wallet
   },
 
@@ -161,21 +161,21 @@ export const formatCurrency = (amount: number): string => {
 };
 
 export const calculateTokens = (usdAmount: number): number => {
-  return usdAmount / ICO_CONFIG.token.price;
+  return usdAmount / TRST_CONFIG.token.price;
 };
 
 export const calculateProgress = (raised: number): number => {
-  return (raised / ICO_CONFIG.sale.hardCap) * 100;
+  return (raised / TRST_CONFIG.sale.hardCap) * 100;
 };
 
 export const isSaleActive = (): boolean => {
   const now = new Date();
-  return now >= ICO_CONFIG.sale.startDate && now <= ICO_CONFIG.sale.endDate;
+  return now >= TRST_CONFIG.sale.startDate && now <= TRST_CONFIG.sale.endDate;
 };
 
 export const getTimeRemaining = () => {
   const now = new Date();
-  const end = ICO_CONFIG.sale.endDate;
+  const end = TRST_CONFIG.sale.endDate;
   const diff = end.getTime() - now.getTime();
 
   if (diff <= 0) {

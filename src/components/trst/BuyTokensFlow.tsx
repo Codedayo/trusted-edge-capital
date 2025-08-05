@@ -27,7 +27,7 @@ import {
   Circle
 } from 'lucide-react';
 
-interface ICOData {
+interface TRSTData {
   tokenName: string;
   tokenSymbol: string;
   tokenPrice: number;
@@ -46,7 +46,7 @@ interface UserParticipation {
 }
 
 interface BuyTokensFlowProps {
-  icoData: ICOData;
+  icoData: TRSTData;
   userParticipation: UserParticipation;
 }
 

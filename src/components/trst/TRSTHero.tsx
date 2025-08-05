@@ -13,13 +13,13 @@ import {
   Users,
   Star
 } from 'lucide-react';
-import { ICOData } from '@/hooks/use-ico';
+import { TRSTData } from '@/hooks/use-trst';
 
-interface ICOHeroProps {
-  icoData: ICOData;
+interface TRSTHeroProps {
+  icoData: TRSTData;
 }
 
-export default function ICOHero({ icoData }: ICOHeroProps) {
+export default function TRSTHero({ icoData }: TRSTHeroProps) {
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,

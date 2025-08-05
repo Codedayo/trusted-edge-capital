@@ -1,6 +1,6 @@
-# TRST Token Sale (TRST) Module
+# TRST Token Sale Module
 
-A comprehensive Initial Coin Offering (TRST) module for the Trusted Edge Capital platform, featuring a complete token sale interface with wallet integration, KYC verification, and real-time statistics.
+A comprehensive TRST token sale module for the Trusted Edge Capital platform, featuring a complete token sale interface with wallet integration, KYC verification, and real-time statistics.
 
 ## 🚀 Features
 
@@ -18,25 +18,25 @@ A comprehensive Initial Coin Offering (TRST) module for the Trusted Edge Capital
 ```
 src/
 ├── pages/
-│   └── ICO.tsx                    # Main TRST page
-├── components/ico/
-│   ├── ICOHero.tsx               # Hero section with countdown
+│   └── TRST.tsx                  # Main TRST page
+├── components/trst/
+│   ├── TRSTHero.tsx              # Hero section with countdown
 │   ├── TokenSaleSummary.tsx      # Real-time sale statistics
 │   ├── BuyTokensFlow.tsx         # Token purchase interface
 │   ├── TokenomicsChart.tsx       # Token distribution chart
 │   ├── VestingSchedule.tsx       # Unlock timeline
 │   ├── KYCForm.tsx               # Identity verification
-│   └── ico-config.ts             # TRST configuration
+│   └── trst-config.ts            # TRST configuration
 ├── hooks/
-└── use-ico.ts                # TRST state management
+└── use-trst.ts                   # TRST state management
 ```
 
 ## ⚙️ Configuration
 
-### 1. Update Token Information in `src/lib/ico-config.ts`:
+### 1. Update Token Information in `src/lib/trst-config.ts`:
 
 ```typescript
-export const ICO_CONFIG = {
+export const TRST_CONFIG = {
   token: {
     name: 'TRST Token',
     symbol: 'TRST',
@@ -89,7 +89,7 @@ npm run dev
 ```
 
 ### 3. Access TRST Page:
-Navigate to `http://localhost:5173/ico`
+Navigate to `http://localhost:5173/trst`
 
 ## 🎨 Customization
 
@@ -121,17 +121,17 @@ const navigation = [
 Ensure the TRST route is added to your router:
 
 ```typescript
-<Route path="/ico" element={<ICO />} />
+<Route path="/trst" element={<TRST />} />
 ```
 
 ## 📊 State Management
 
-### useICO Hook
+### useTRST Hook
 The TRST module uses a custom hook for state management:
 
 ```typescript
 const {
-  icoData,           // Current TRST state
+  trstData,          // Current TRST state
   userParticipation, // User's participation data
   connectWallet,     // Wallet connection function
   buyTokens,         // Token purchase function
@@ -139,7 +139,7 @@ const {
   getSaleStats,      // Get sale statistics
   canParticipate,    // Check if user can participate
   isSaleActive       // Check if sale is active
-} = useICO();
+} = useTRST();
 ```
 
 ## 🔐 Security Considerations

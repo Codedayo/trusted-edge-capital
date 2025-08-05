@@ -18,7 +18,7 @@ import {
   Zap
 } from 'lucide-react';
 
-interface ICOData {
+interface TRSTData {
   tokenName: string;
   tokenSymbol: string;
   tokenPrice: number;
@@ -35,7 +35,7 @@ interface ICOData {
 }
 
 interface TokenSaleSummaryProps {
-  icoData: ICOData;
+  icoData: TRSTData;
 }
 
 export default function TokenSaleSummary({ icoData }: TokenSaleSummaryProps) {

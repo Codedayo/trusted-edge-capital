@@ -25,22 +25,22 @@ import {
   Menu,
   X
 } from 'lucide-react';
-import ICOHero from '@/components/ico/ICOHero';
-import TokenSaleSummary from '@/components/ico/TokenSaleSummary';
-import BuyTokensFlow from '@/components/ico/BuyTokensFlow';
-import TokenomicsChart from '@/components/ico/TokenomicsChart';
-import VestingSchedule from '@/components/ico/VestingSchedule';
-import KYCForm from '@/components/ico/KYCForm';
+import TRSTHero from '@/components/trst/TRSTHero';
+import TokenSaleSummary from '@/components/trst/TokenSaleSummary';
+import BuyTokensFlow from '@/components/trst/BuyTokensFlow';
+import TokenomicsChart from '@/components/trst/TokenomicsChart';
+import VestingSchedule from '@/components/trst/VestingSchedule';
+import KYCForm from '@/components/trst/KYCForm';
 import { useAuth } from '@/contexts/AuthContext';
-import { useICO } from '@/hooks/use-ico';
+import { useTRST } from '@/hooks/use-trst';
 import { useIsMobile } from '@/hooks/use-mobile';
 
-export default function ICO() {
+export default function TRST() {
   const { user } = useAuth();
   const isMobile = useIsMobile();
   const [activeTab, setActiveTab] = useState('overview');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const { icoData, userParticipation, connectWallet, buyTokens, submitKYC, getSaleStats, canParticipate, isSaleActive } = useICO();
+  const { icoData, userParticipation, connectWallet, buyTokens, submitKYC, getSaleStats, canParticipate, isSaleActive } = useTRST();
 
   const stats = [
     {
@@ -129,7 +129,7 @@ export default function ICO() {
                 Trusted Edge Capital
               </h1>
               <p className="text-xs sm:text-sm text-trusted-text-secondary dark:text-slate-400">
-                TRST COIN
+                TRST TOKEN
               </p>
             </div>
           </div>
@@ -170,7 +170,7 @@ export default function ICO() {
                             Trusted Edge Capital
                           </h1>
                           <p className="text-xs text-trusted-text-secondary dark:text-slate-400">
-                            TRST COIN
+                            TRST TOKEN
                           </p>
                         </div>
                       </div>
@@ -203,7 +203,7 @@ export default function ICO() {
         {/* Main Content */}
         <main className="flex-1 p-4 sm:p-6 lg:p-8">
           {/* Hero Section */}
-          <ICOHero icoData={icoData} />
+          <TRSTHero icoData={icoData} />
 
           {/* Stats Cards */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 mb-6 sm:mb-8">
