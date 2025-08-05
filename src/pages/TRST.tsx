@@ -23,7 +23,8 @@ import {
   Info,
   ExternalLink,
   Menu,
-  X
+  X,
+  ArrowRight
 } from 'lucide-react';
 import TRSTHero from '@/components/trst/TRSTHero';
 import TokenSaleSummary from '@/components/trst/TokenSaleSummary';
@@ -92,7 +93,7 @@ export default function TRST() {
             className={`w-full justify-start h-auto p-3 ${
               activeTab === item.id 
                 ? 'bg-gradient-to-r from-trusted-gold to-yellow-500 text-trusted-navy shadow-lg' 
-                : 'hover:bg-slate-100 dark:hover:bg-slate-700 text-trusted-text-primary dark:text-slate-100'
+                : 'hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-900 dark:text-slate-100'
             }`}
             onClick={() => {
               setActiveTab(item.id);
