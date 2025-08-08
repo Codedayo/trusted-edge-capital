@@ -95,10 +95,11 @@ export default function Dashboard() {
     { id: 'trading', label: 'Trading', icon: Activity },
     { id: 'wallet', label: 'Wallet', icon: Wallet },
     { id: 'security', label: 'Security', icon: Shield },
-    { id: 'history', label: 'History', icon: History },
-    { id: 'analytics', label: 'Analytics', icon: Activity },
-    { id: 'trst', label: 'TRST TOKEN', icon: Coins, external: true, href: '/trst' }
-  ];
+            { id: 'history', label: 'History', icon: History },
+        { id: 'analytics', label: 'Analytics', icon: Activity },
+        { id: 'settings', label: 'Settings', icon: Settings },
+        { id: 'trst', label: 'TRST TOKEN', icon: Coins, external: true, href: '/trst' }
+      ];
 
   const NavigationSidebar = () => (
     <div className="p-4 sm:p-6">
